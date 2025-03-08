@@ -13,10 +13,14 @@ import objects.MenuCharacter;
 import substates.GameplayChangersSubstate;
 import substates.ResetScoreSubState;
 
+import flixel.util.FlxSpriteUtil;
+
 class StoryMenuState extends MusicBeatState
 {
 	public static var weekCompleted:Map<String, Bool> = new Map<String, Bool>();
 
+	var scoreBG:FlxSprite;
+	var weekBG:FlxSprite;
 	var scoreText:FlxText;
 
 	private static var lastDifficultyName:String = '';
@@ -51,6 +55,12 @@ class StoryMenuState extends MusicBeatState
 		if(curWeek >= WeekData.weeksList.length) curWeek = 0;
 		persistentUpdate = persistentDraw = true;
 
+		scoreBG = FlxSpriteUtil.drawRoundRect(new FlxSprite(0, 0).makeGraphic(FlxG.width, 56, FlxColor.TRANSPARENT), 0, 0, FlxG.width, 56, 15, 15, FlxColor.BLACK);
+		scoreBG.alpha = 0.6;
+
+		weekBG = FlxSpriteUtil.drawRoundRect(new FlxSprite(0, 452).makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT), 15, 15, FlxG.width, FlxG.height, 0, 0, FlxColor.BLACK);
+		weekBG.alpha = 0.6;
+		
 		scoreText = new FlxText(10, 10, 0, "SCORE: 49324858", 36);
 		scoreText.setFormat("VCR OSD Mono", 32);
 
@@ -65,7 +75,7 @@ class StoryMenuState extends MusicBeatState
 		rankText.screenCenter(X);
 
 		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
-		var bgYellow:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 386, 0xFFF9CF51);
+		var bgYellow:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, 0xFFF9CF51);
 		bgSprite = new FlxSprite(0, 56);
 
 		grpWeekText = new FlxTypedGroup<MenuItem>();
@@ -169,6 +179,8 @@ class StoryMenuState extends MusicBeatState
 		txtTracklist.color = 0xFFe55777;
 		add(txtTracklist);
 		// add(rankText);
+		add(scoreBG);
+		add(weekBG);
 		add(scoreText);
 		add(txtWeekTitle);
 
