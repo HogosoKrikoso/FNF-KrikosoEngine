@@ -92,7 +92,7 @@ class TitleState extends MusicBeatState
 		#if CHECK_FOR_UPDATES
 		if(ClientPrefs.data.checkForUpdates && !closedState) {
 			trace('checking for update');
-			var http = new haxe.Http("https://raw.githubusercontent.com/MobilePorting/FNF-PsychEngine-Mobile/main/gitVersion.txt");
+			var http = new haxe.Http("https://raw.githubusercontent.com/HogMedioscorched/FNF-KirkosoEngine/main/gitVersion.txt");
 
 			http.onData = function (data:String)
 			{
@@ -322,6 +322,8 @@ class TitleState extends MusicBeatState
 
 		Paths.clearUnusedMemory();
 		// credGroup.add(credTextShit);
+
+		addTouchPad('LEFT_RIGHT', 'A_B');
 	}
 
 	function getIntroTextShit():Array<Array<String>>
@@ -350,21 +352,13 @@ class TitleState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		if (FlxG.sound.music != null)
+		if (FlxG.sound.music != null) {
 			Conductor.songPosition = FlxG.sound.music.time;
+		}
+		
 		// FlxG.watch.addQuick('amp', FlxG.sound.music.amplitude);
 
 		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
-
-		#if FLX_TOUCH
-		for (touch in FlxG.touches.list)
-		{
-			if (touch.justPressed)
-			{
-				pressedEnter = true;
-			}
-		}
-		#end
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
@@ -377,6 +371,12 @@ class TitleState extends MusicBeatState
 			if (gamepad.justPressed.B)
 				pressedEnter = true;
 			#end
+		}
+
+		if (controls.BACK) {
+                        if (logoBl != null) {
+			        logoBl.angle = logoBl.angle + 1;
+			}
 		}
 		
 		if (newTitle) {
