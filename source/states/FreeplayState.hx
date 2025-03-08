@@ -12,6 +12,8 @@ import substates.ResetScoreSubState;
 
 import flixel.math.FlxMath;
 
+import flixel.util.FlxSpriteUtil;
+
 class FreeplayState extends MusicBeatState
 {
 	var songs:Array<SongMetadata> = [];
@@ -25,6 +27,7 @@ class FreeplayState extends MusicBeatState
 	var scoreBG:FlxSprite;
 	var scoreText:FlxText;
 	var diffText:FlxText;
+	var curSongText:FlxText;
 	var lerpScore:Int = 0;
 	var lerpRating:Float = 0;
 	var intendedScore:Int = 0;
@@ -124,10 +127,10 @@ class FreeplayState extends MusicBeatState
 		}
 		WeekData.setDirectoryFromWeek();
 
-		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
+		scoreText = new FlxText(0, 5, 0, "", 32);
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
 
-		scoreBG = new FlxSprite(scoreText.x - 6, 0).makeGraphic(1, 66, 0xFF000000);
+		scoreBG = FlxSpriteUtil.drawRoundRect(new FlxSprite(0, 0).makeGraphic(FlxG.width, 66, FlxColor.TRANSPARENT), 0, 0, FlxG.width, 66, 15, 15, FlxColor.BLACK);
 		scoreBG.alpha = 0.6;
 		add(scoreBG);
 
@@ -136,6 +139,10 @@ class FreeplayState extends MusicBeatState
 		add(diffText);
 
 		add(scoreText);
+
+		curSongText = new FlxText(5, 5, 0, "", 32);
+		curSongText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
+		add(curSongText);
 
 
 		missingTextBG = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -229,6 +236,8 @@ class FreeplayState extends MusicBeatState
 
 		var shiftMult:Int = 1;
 		if((FlxG.keys.pressed.SHIFT || touchPad.buttonZ.pressed) && !player.playingMusic) shiftMult = 3;
+
+		curSongText.text = (curSelected + 1) + '/' + songs.length;
 
 		if (!player.playingMusic)
 		{
@@ -535,11 +544,8 @@ class FreeplayState extends MusicBeatState
 	}
 
 	private function positionHighscore() {
-		scoreText.x = FlxG.width - scoreText.width - 6;
-		scoreBG.scale.x = FlxG.width - scoreText.x + 6;
-		scoreBG.x = FlxG.width - (scoreBG.scale.x / 2);
-		diffText.x = Std.int(scoreBG.x + (scoreBG.width / 2));
-		diffText.x -= diffText.width / 2;
+		scoreText.x = (FlxG.width - scoreText.width)/2;
+		diffText.x = (FlxG.width - diffText.width)/2;
 	}
 
 	var _drawDistance:Int = 4;
@@ -560,7 +566,8 @@ class FreeplayState extends MusicBeatState
 		{
 			var item:Alphabet = grpSongs.members[i];
 			item.visible = item.active = true;
-			item.x = ((item.targetY - lerpSelected) * item.distancePerItem.x) + item.startPosition.x;
+			item.screenCenter(X);
+			item.x -= (150/2);
 			item.y = ((item.targetY - lerpSelected) * 1.3 * item.distancePerItem.y) + item.startPosition.y;
 
 			var icon:HealthIcon = iconArray[i];
