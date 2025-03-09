@@ -6,4 +6,4 @@ Engine Folder:
 ```
 /storage/emulated/0/.KrikosoEngine
 ```
-(make sure to create that folder when booting the game up)
+(make sure to create that folder when the game warns you about it)
