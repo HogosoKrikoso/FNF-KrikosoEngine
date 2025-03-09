@@ -970,6 +970,10 @@ class PlayState extends MusicBeatState
 
 	public function startCountdown()
 	{
+		if(ClientPrefs.data.forceSkipCountdown) {
+			skipCountdown = true
+		}
+		
 		if(startedCountdown) {
 			callOnScripts('onStartCountdown');
 			return false;
