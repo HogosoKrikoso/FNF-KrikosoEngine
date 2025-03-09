@@ -58,7 +58,7 @@ class StoryMenuState extends MusicBeatState
 		scoreBG = FlxSpriteUtil.drawRoundRect(new FlxSprite(0, 0).makeGraphic(FlxG.width, 56, FlxColor.TRANSPARENT), 0, 0, FlxG.width, 56, 15, 15, FlxColor.BLACK);
 		scoreBG.alpha = 0.6;
 
-		weekBG = FlxSpriteUtil.drawRoundRect(new FlxSprite(0, 452).makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT), 0, 0, FlxG.width, FlxG.height, 15, 15, FlxColor.BLACK);
+		weekBG = FlxSpriteUtil.drawRoundRect(new FlxSprite(0, 442).makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT), 0, 0, FlxG.width, FlxG.height, 30, 30, FlxColor.BLACK);
 		weekBG.alpha = 0.6;
 		
 		scoreText = new FlxText(10, 10, 0, "SCORE: 49324858", 36);
@@ -132,7 +132,6 @@ class StoryMenuState extends MusicBeatState
 		}
 
 		difficultySelectors = new FlxGroup();
-		add(difficultySelectors);
 
 		leftArrow = new FlxSprite(grpWeekText.members[0].x + grpWeekText.members[0].width + 10, grpWeekText.members[0].y + 10);
 		leftArrow.antialiasing = ClientPrefs.data.antialiasing;
@@ -179,6 +178,7 @@ class StoryMenuState extends MusicBeatState
 		add(txtWeekTitle);
 		add(tracksSprite);
 		add(txtTracklist);
+		add(difficultySelectors);
 		add(bgYellowOverlapWeeks);
 		add(bgSprite);
 		add(grpWeekCharacters);
@@ -434,6 +434,14 @@ class StoryMenuState extends MusicBeatState
 			curDifficulty = Math.round(Math.max(0, Difficulty.defaultList.indexOf(Difficulty.getDefault())));
 		else
 			curDifficulty = 0;
+
+		if (Difficulty.list.length > 1) {
+			leftArrow.visible = true;
+			rightArrow.visible = true;
+		} else {
+			leftArrow.visible = false;
+			rightArrow.visible = false;
+		}
 
 		var newPos:Int = Difficulty.list.indexOf(lastDifficultyName);
 		//trace('Pos of ' + lastDifficultyName + ' is ' + newPos);
