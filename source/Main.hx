@@ -89,8 +89,8 @@ class Main extends Sprite
 		backend.CrashHandler.init();
 
 		#if mobile
-		        game.width = Capabilities.screenResolutionX;
-		        game.height = Capabilities.screenResolutionY;
+		        game.width = Std.int(Capabilities.screenResolutionX);
+		        game.height = Std.int(Capabilities.screenResolutionY);
 		#end
 
 		#if windows
