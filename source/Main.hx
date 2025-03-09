@@ -88,10 +88,10 @@ class Main extends Sprite
 		#end
 		backend.CrashHandler.init();
 
-		#if mobile
+		/*#if mobile
 		        game.width = Std.int(Capabilities.screenResolutionX);
 		        game.height = Std.int(Capabilities.screenResolutionY);
-		#end
+		#end*/
 
 		#if windows
 		// DPI Scaling fix for windows 
