@@ -159,6 +159,12 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
+		var option:Option = new Option('Combo on Stage',
+			"If unchecked, Ratings and Combo will show on Stage instead of UI.",
+			'scoreOnWorld',
+			'bool');
+		addOption(option);
+
 		super();
 		add(notes);
 	}
