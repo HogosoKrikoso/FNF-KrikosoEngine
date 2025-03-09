@@ -581,7 +581,7 @@ class PlayState extends MusicBeatState
 		uiGroup.cameras = [camHUD];
 		noteGroup.cameras = [camHUD];
 				
-		if(ClientPrefs.data.scoreOnWorld) {
+		if(!ClientPrefs.data.scoreOnWorld) {
 			comboGroup.cameras = [camHUD];
 		} else {
 			comboGroup.cameras = [camGame];
@@ -1148,15 +1148,31 @@ class PlayState extends MusicBeatState
 			return;
 
 		var str:String = "N/A";
+                var separator:String = "";
+                if (ClientPrefs.data.separator) == "Double Slash" {
+                        separator = "//";
+                }
+                if (ClientPrefs.data.separator) == "Minus Symbol" {
+                        separator = "-";
+                }
+                if (ClientPrefs.data.separator) == "Pipe" {
+                        separator = "|";
+                }
+                if (ClientPrefs.data.separator) == "Circle" {
+                        separator = "•";
+                }
+                if (ClientPrefs.data.separator) == "Virgulilla" {
+                        separator = "~";
+                }
 		if(totalPlayed != 0)
 		{
 			var percent:Float = CoolUtil.floorDecimal(ratingPercent * 100, 2);
-			str = '${percent}% - ${ratingName} // (${ratingFC})';
+			str = '${percent}% - ${ratingName} ${separator} (${ratingFC})';
 		}
 
 		var tempScore:String = 'Score: ${songScore}'
-		+ (!instakillOnMiss ? ' // Breaks: ${songMisses}' : "")
-		+ ' // CoolMeter: ${str}';
+		+ (!instakillOnMiss ? ' ${separator} Breaks: ${songMisses}' : "${separator} (No Breaks Mode)")
+		+ ' ${separator} CoolMeter: ${str}';
 		// "tempScore" variable is used to prevent another memory leak, just in case
 		// "\n" here prevents the text from being cut off by beat zooms
 		scoreTxt.text = '${tempScore}\n';
