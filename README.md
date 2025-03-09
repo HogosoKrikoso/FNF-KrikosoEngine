@@ -1,6 +1,6 @@
 # Friday Night Funkin: Krikoso Engine
 
-Forked from a mobile port of FNF Psych Engine made by karimm(or how do you type it i forgor)
+Forked from a mobile port of Psych Engine made by mcgabe19.
 
 Engine Folder:
 ```
