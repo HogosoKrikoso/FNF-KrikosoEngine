@@ -14,6 +14,8 @@ import flixel.math.FlxMath;
 
 import flixel.util.FlxSpriteUtil;
 
+import flixel.effects.FlxFlicker;
+
 class FreeplayState extends MusicBeatState
 {
 	var songs:Array<SongMetadata> = [];
@@ -414,6 +416,11 @@ class FreeplayState extends MusicBeatState
 				super.update(elapsed);
 				return;
 			}
+
+			FlxG.sound.play(Paths.sound('confirmMenu'));
+
+			FlxFlicker.flicker(grpSongs.members[curSelected], 1, 0.06, false, false, function(flick:FlxFlicker) {
+			
 			LoadingState.loadAndSwitchState(new PlayState());
 
 			FlxG.sound.music.volume = 0;
@@ -422,6 +429,8 @@ class FreeplayState extends MusicBeatState
 			#if (MODS_ALLOWED && DISCORD_ALLOWED)
 			DiscordClient.loadModRPC();
 			#end
+
+			}
 		}
 		else if((controls.RESET || touchPad.buttonY.justPressed) && !player.playingMusic)
 		{
