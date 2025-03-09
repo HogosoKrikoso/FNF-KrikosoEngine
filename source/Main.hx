@@ -16,6 +16,8 @@ import lime.app.Application;
 import states.TitleState;
 import mobile.backend.MobileScaleMode;
 import openfl.events.KeyboardEvent;
+import openfl.system.Capabilities;
+	
 #if linux
 import lime.graphics.Image;
 #end
@@ -86,6 +88,11 @@ class Main extends Sprite
 		#end
 		backend.CrashHandler.init();
 
+		#if mobile
+		        game.width = Capabilities.screenResolutionX;
+		        game.height = Capabilities.screenResolutionY;
+		#end
+
 		#if windows
 		// DPI Scaling fix for windows 
 		// this shouldn't be needed for other systems
@@ -138,8 +145,9 @@ class Main extends Sprite
 			game.height = Math.ceil(stageHeight / game.zoom);
 		}
 		#else
-		if (game.zoom == -1.0)
+		if (game.zoom == -1.0) {
 			game.zoom = 1.0;
+	        }
 		#end
 	
 		#if LUA_ALLOWED Lua.set_callbacks_function(cpp.Callable.fromStaticFunction(psychlua.CallbackHandler.call)); #end
