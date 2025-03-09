@@ -21,12 +21,14 @@ import states.TitleState;
 	public var hitboxType:String = "Gradient";
 	public var popUpRating:Bool = true;
 	public var scoreOnWorld:Bool = false;
+	public var separator:String = "Double Slash";
 	public var vsync:Bool = false;
 	public var gameOverVibration:Bool = false;
 
 	public var downScroll:Bool = false;
 	public var middleScroll:Bool = false;
 	public var opponentStrums:Bool = true;
+	public var forceSkipCountdown:Bool = false;
 	public var showFPS:Bool = true;
 	public var flashing:Bool = true;
 	public var autoPause:Bool = true;
