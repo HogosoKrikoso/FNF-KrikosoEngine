@@ -58,7 +58,7 @@ class StoryMenuState extends MusicBeatState
 		scoreBG = FlxSpriteUtil.drawRoundRect(new FlxSprite(0, 0).makeGraphic(FlxG.width, 56, FlxColor.TRANSPARENT), 0, 0, FlxG.width, 56, 15, 15, FlxColor.BLACK);
 		scoreBG.alpha = 0.6;
 
-		weekBG = FlxSpriteUtil.drawRoundRect(new FlxSprite(0, 452).makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT), 15, 15, FlxG.width, FlxG.height, 0, 0, FlxColor.BLACK);
+		weekBG = FlxSpriteUtil.drawRoundRect(new FlxSprite(0, 452).makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT), 0, 0, FlxG.width, FlxG.height, 15, 15, FlxColor.BLACK);
 		weekBG.alpha = 0.6;
 		
 		scoreText = new FlxText(10, 10, 0, "SCORE: 49324858", 36);
@@ -76,18 +76,14 @@ class StoryMenuState extends MusicBeatState
 
 		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
 		var bgYellow:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, 0xFFF9CF51);
+		var bgYellowOverlapWeeks:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 396, 0xFFF9CF51);
 		bgSprite = new FlxSprite(0, 56);
 
 		grpWeekText = new FlxTypedGroup<MenuItem>();
-		add(grpWeekText);
-
-		var blackBarThingie:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, 56, FlxColor.BLACK);
-		add(blackBarThingie);
 
 		grpWeekCharacters = new FlxTypedGroup<MenuCharacter>();
 
 		grpLocks = new FlxTypedGroup<FlxSprite>();
-		add(grpLocks);
 
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
@@ -166,23 +162,26 @@ class StoryMenuState extends MusicBeatState
 		difficultySelectors.add(rightArrow);
 
 		add(bgYellow);
-		add(bgSprite);
-		add(grpWeekCharacters);
 
 		var tracksSprite:FlxSprite = new FlxSprite(FlxG.width * 0.07, bgSprite.y + 425).loadGraphic(Paths.image('Menu_Tracks'));
 		tracksSprite.antialiasing = ClientPrefs.data.antialiasing;
-		add(tracksSprite);
 
 		txtTracklist = new FlxText(FlxG.width * 0.05, tracksSprite.y + 60, 0, "", 32);
 		txtTracklist.alignment = CENTER;
 		txtTracklist.font = rankText.font;
 		txtTracklist.color = 0xFFe55777;
-		add(txtTracklist);
 		// add(rankText);
 		add(scoreBG);
 		add(weekBG);
+		add(grpWeekText);
+		add(grpLocks);
 		add(scoreText);
 		add(txtWeekTitle);
+		add(tracksSprite);
+		add(txtTracklist);
+		add(bgYellowOverlapWeeks);
+		add(bgSprite);
+		add(grpWeekCharacters);
 
 		changeWeek();
 		changeDifficulty();
