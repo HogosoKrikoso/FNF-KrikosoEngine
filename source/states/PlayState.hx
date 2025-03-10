@@ -1152,20 +1152,20 @@ class PlayState extends MusicBeatState
 			return;
 
 		var str:String = "N/A";
-                var separator:String = "";
-                if (ClientPrefs.data.separator) == "Double Slash" {
+                var separator:String = "nothing";
+                if(ClientPrefs.data.separator == "Double Slash") {
                         separator = "//";
                 }
-                if (ClientPrefs.data.separator) == "Minus Symbol" {
+                if(ClientPrefs.data.separator == "Minus Symbol") {
                         separator = "-";
                 }
-                if (ClientPrefs.data.separator) == "Pipe" {
+                if(ClientPrefs.data.separator == "Pipe") {
                         separator = "|";
                 }
-                if (ClientPrefs.data.separator) == "Circle" {
+                if(ClientPrefs.data.separator == "Circle") {
                         separator = "•";
                 }
-                if (ClientPrefs.data.separator) == "Virgulilla" {
+                if(ClientPrefs.data.separator == "Virgulilla") {
                         separator = "~";
                 }
 		if(totalPlayed != 0)
