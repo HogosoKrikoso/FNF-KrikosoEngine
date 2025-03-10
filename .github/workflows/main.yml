@@ -16,7 +16,7 @@ jobs:
           - name: Android 32 Bits
             os: ubuntu-24.04
             buildArgs: "android -ONLY_ARMV7"
-            artifactName: androidBuild-x32
+            artifactName: androidBuild32
             artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
           - name: Android 64 Bits
             os: ubuntu-24.04
