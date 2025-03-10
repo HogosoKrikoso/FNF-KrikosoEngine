@@ -53,7 +53,7 @@ class OptionsState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		bg.color = 0xFFea71fd;
-		bg.scrollFactor.set(0,0)
+		bg.scrollFactor.set(0,0);
 		bg.updateHitbox();
 
 		bg.screenCenter();
@@ -69,12 +69,12 @@ class OptionsState extends MusicBeatState
 			var optionText:Alphabet = new Alphabet(65, 10, options[i], true);
 			optionText.screenCenter(Y);
 			optionText.y += (75 * i);
-			optionText.scrollFactor.set(0,1)
+			optionText.scrollFactor.set(0,1);
 			grpOptions.add(optionText);
 		}
 
 		selectorLeft = new Alphabet(5, 10, '>', true);
-		selectorText.scrollFactor.set(0,1)
+		selectorText.scrollFactor.set(0,1);
 		add(selectorLeft);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
