@@ -85,6 +85,7 @@ import states.TitleState;
 		'opponentplay' => false
 	];
 
+	public var randomNotesDirection:Int = 0;
 	public var comboOffset:Array<Int> = [0, 0, 0, 0];
 	public var ratingOffset:Int = 0;
 	public var sickWindow:Int = 45;
