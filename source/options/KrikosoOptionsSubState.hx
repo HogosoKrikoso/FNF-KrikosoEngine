@@ -30,6 +30,12 @@ class KrikosoOptionsSubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
+		var option:Option = new Option('Random Direction Notes',
+			"If checked, It will randomize the direction of all notes on every song.",
+			'randomNotesDirection',
+			'bool');
+		addOption(option);
+
 		super();
 	}
 }
