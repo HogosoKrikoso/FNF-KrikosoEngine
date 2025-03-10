@@ -21,6 +21,7 @@ class OptionsState extends MusicBeatState
 
 	function openSelectedSubstate(label:String) {
 		persistentUpdate = false;
+		FlxG.camera.follow(null);
 		if (label != "Adjust Delay and Combo") removeTouchPad();
 		switch(label) {
 			case 'Note Colors':
