@@ -9,21 +9,20 @@ import mobile.substates.MobileControlSelectSubState;
 import sys.thread.Thread;
 import sys.thread.Mutex;
 #end
+import flixel.math.FlxMath;
 
 class OptionsState extends MusicBeatState
 {
 	var options:Array<String> = ['Note Colors', 'Controls', 'Adjust Delay and Combo', 'Graphics', 'Visuals and UI', 'Gameplay', 'Mobile Options', 'Mobile Controls', 'Krikoso Engine'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
+	var lerpSelected:Float = 0;
 	public static var menuBG:FlxSprite;
 	public static var onPlayState:Bool = false;
 	#if (target.threaded) var mutex:Mutex = new Mutex(); #end
 
 	function openSelectedSubstate(label:String) {
 		persistentUpdate = false;
-		FlxG.camera.follow(camFollow, null, 99999999);
-		camFollow.setPosition(0, 0);
-		FlxG.camera.follow(camFollow, null, 9);
 		if (label != "Adjust Delay and Combo") removeTouchPad();
 		switch(label) {
 			case 'Note Colors':
@@ -49,8 +48,6 @@ class OptionsState extends MusicBeatState
 
 	var selectorLeft:Alphabet;
 
-	var camFollow:FlxObject;
-
 	override function create() {
 		#if DISCORD_ALLOWED
 		DiscordClient.changePresence("Options Menu", null);
@@ -59,7 +56,6 @@ class OptionsState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		bg.color = 0xFFea71fd;
-		bg.scrollFactor.set(0,0);
 		bg.updateHitbox();
 
 		bg.screenCenter();
@@ -73,16 +69,11 @@ class OptionsState extends MusicBeatState
 			var optionText:Alphabet = new Alphabet(65, 10, options[i], true);
 			optionText.screenCenter(Y);
 			optionText.y += (75 * i);
-			optionText.scrollFactor.set(0,1);
 			grpOptions.add(optionText);
 		}
 
 		selectorLeft = new Alphabet(5, 10, '>', true);
-		selectorLeft.scrollFactor.set(0,1);
 		add(selectorLeft);
-
-		camFollow = new FlxObject(0, 0, 1, 1);
-		add(camFollow);
 
 		changeSelection();
 		ClientPrefs.saveSettings();
@@ -90,7 +81,6 @@ class OptionsState extends MusicBeatState
 		addTouchPad("UP_DOWN", "A_B_C");
 
 		super.create();
-		FlxG.camera.follow(camFollow, null, 9);
 		
 	}
 
@@ -110,6 +100,12 @@ class OptionsState extends MusicBeatState
     var exiting:Bool = false;
 	override function update(elapsed:Float) {
 		super.update(elapsed);
+
+		lerpSelected = FlxMath.lerp(curSelected, lerpSelected, Math.exp(-elapsed * 9.6));
+
+		for (item in grpOptions.members) {
+			item.y = 10 + (75 * (i - lerpSelected));
+		}
 
 		if (!exiting) {
 		if (controls.UI_UP_P) {
@@ -150,9 +146,8 @@ class OptionsState extends MusicBeatState
 			item.alpha = 0.6;
 			if (item.targetY == 0) {
 				item.alpha = 1;
-				selectorLeft.x = item.x - 63;
-				selectorLeft.y = item.y;
-				camFollow.setPosition(item.x, item.y);
+				//selectorLeft.x = item.x - 63;
+				//selectorLeft.y = item.y;
 			}
 		}
 		FlxG.sound.play(Paths.sound('scrollMenu'));
