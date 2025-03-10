@@ -105,7 +105,7 @@ class OptionsState extends MusicBeatState
 
 		var bullShit:Int = 0;
 		for (item in grpOptions.members) {
-			item.y = 10 + (75 * (bullshit - lerpSelected));
+			item.y = 10 + (75 * (bullShit - lerpSelected));
 			bullShit++;
 		}
 
