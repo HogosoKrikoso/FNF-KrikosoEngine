@@ -103,8 +103,10 @@ class OptionsState extends MusicBeatState
 
 		lerpSelected = FlxMath.lerp(curSelected, lerpSelected, Math.exp(-elapsed * 9.6));
 
+		var bullShit:Int = 0;
 		for (item in grpOptions.members) {
-			item.y = 10 + (75 * (i - lerpSelected));
+			item.y = 10 + (75 * (bullshit - lerpSelected));
+			bullShit++;
 		}
 
 		if (!exiting) {
