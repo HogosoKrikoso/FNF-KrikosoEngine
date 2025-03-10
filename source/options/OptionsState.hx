@@ -53,10 +53,13 @@ class OptionsState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		bg.color = 0xFFea71fd;
+		bg.scrollFactor.set(0,0)
 		bg.updateHitbox();
 
 		bg.screenCenter();
 		add(bg);
+
+		var camFollow:FlxObject;
 
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
@@ -66,11 +69,16 @@ class OptionsState extends MusicBeatState
 			var optionText:Alphabet = new Alphabet(65, 10, options[i], true);
 			optionText.screenCenter(Y);
 			optionText.y += (75 * i);
+			optionText.scrollFactor.set(0,1)
 			grpOptions.add(optionText);
 		}
 
-		selectorLeft = new Alphabet(0, 0, '>', true);
+		selectorLeft = new Alphabet(5, 10, '>', true);
+		selectorText.scrollFactor.set(0,1)
 		add(selectorLeft);
+
+		camFollow = new FlxObject(0, 0, 1, 1);
+		add(camFollow);
 
 		changeSelection();
 		ClientPrefs.saveSettings();
@@ -78,6 +86,8 @@ class OptionsState extends MusicBeatState
 		addTouchPad("UP_DOWN", "A_B_C");
 
 		super.create();
+		FlxG.camera.follow(camFollow, null, 9);
+		
 	}
 
 	override function closeSubState() {
@@ -138,8 +148,8 @@ class OptionsState extends MusicBeatState
 				item.alpha = 1;
 				selectorLeft.x = item.x - 63;
 				selectorLeft.y = item.y;
+				camFollow.setPosition(item.x, item.y);
 			}
-			item.offset.y = 75*item.targetY
 		}
 		FlxG.sound.play(Paths.sound('scrollMenu'));
 	}
