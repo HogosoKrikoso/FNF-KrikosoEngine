@@ -60,7 +60,11 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		descBox.alpha = 0.6;
 		add(descBox);
 
-		var titleText:Alphabet = new Alphabet(75, 45, title, true);
+		var titleBox:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, 45, FlxColor.BLACK);
+		titleBox.alpha = 0.6;
+		add(titleBox);
+
+		var titleText:Alphabet = new Alphabet(10, 10, title, true);
 		titleText.setScale(0.6);
 		titleText.alpha = 0.4;
 		add(titleText);
