@@ -46,6 +46,8 @@ class OptionsState extends MusicBeatState
 
 	var selectorLeft:Alphabet;
 
+	var camFollow:FlxObject;
+
 	override function create() {
 		#if DISCORD_ALLOWED
 		DiscordClient.changePresence("Options Menu", null);
@@ -59,8 +61,6 @@ class OptionsState extends MusicBeatState
 
 		bg.screenCenter();
 		add(bg);
-
-		var camFollow:FlxObject;
 
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
