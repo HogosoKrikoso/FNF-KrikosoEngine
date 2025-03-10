@@ -18,10 +18,10 @@ jobs:
             buildArgs: "android -ONLY_ARMV7"
             artifactName: androidBuild32
             artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
-          - name: Android 64 Bits
+          - name: Android
             os: ubuntu-24.04
-            buildArgs: "android -arm64"
-            artifactName: androidBuild64
+            buildArgs: "android"
+            artifactName: androidBuild
             artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
           - name: iOS
             os: macos-15
