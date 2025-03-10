@@ -58,7 +58,7 @@ class MainMenuState extends MusicBeatState
 		magenta = new FlxSprite(0).loadGraphic(Paths.image('menuDesat'));
 		magenta.antialiasing = ClientPrefs.data.antialiasing;
 		magenta.scrollFactor.set(0, 0);
-		magenta.setGraphicSize(Std.int(magenta.width * 1.175));
+		magenta.setGraphicSize(FlxG.width, FlxG.height);
 		magenta.updateHitbox();
 		magenta.screenCenter();
 		magenta.visible = false;
@@ -70,7 +70,7 @@ class MainMenuState extends MusicBeatState
 
 		for (i in 0...optionShit.length)
 		{
-			var menuItem:FlxSprite = new FlxSprite(100+(10*i), (i * 140));
+			var menuItem:FlxSprite = new FlxSprite(100+(100*i), (i * 140));
 			menuItem.antialiasing = ClientPrefs.data.antialiasing;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
