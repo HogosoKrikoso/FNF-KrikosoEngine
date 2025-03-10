@@ -1,5 +1,6 @@
 package options;
 
+import flixel.FlxObject;
 import states.MainMenuState;
 import backend.StageData;
 import flixel.addons.transition.FlxTransitionableState;
@@ -74,7 +75,7 @@ class OptionsState extends MusicBeatState
 		}
 
 		selectorLeft = new Alphabet(5, 10, '>', true);
-		selectorText.scrollFactor.set(0,1);
+		selectorLeft.scrollFactor.set(0,1);
 		add(selectorLeft);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
