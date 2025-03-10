@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - name: Android x86
+          - name: Android
             os: ubuntu-24.04
             buildArgs: "android -ONLY_ARMV7"
             artifactName: androidBuild
