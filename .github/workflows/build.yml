@@ -9,9 +9,6 @@ on:
       os:
         required: true
         type: string
-      setupCommand:
-        required: true
-        type: string
       buildArgs:
         required: true
         type: string
@@ -23,8 +20,8 @@ on:
         type: string
 
 env:
-  HAXE_VERSION: 4.3.6
-  PROJECT_NAME: PsychEngine
+  HAXE_VERSION: 4.3.2
+  PROJECT_NAME: KrikosoEngine
 
 jobs:
   build:
@@ -46,7 +43,15 @@ jobs:
           sudo add-apt-repository ppa:haxe/releases -y
           sudo apt-get update
           sudo apt install haxe -y
-
+          haxelib setup ~/haxelib
+      - name: Setup MSVC Arm64
+        if: inputs.name == 'Windows ARM64'
+        uses: TheMrMilchmann/setup-msvc-dev@v3
+        with:
+          arch: amd64_arm64
+      - name: Install libVLC
+        if: contains(inputs.name, 'Linux')
+        run: sudo apt install libvlc-dev libvlccore-dev
       - name: Setup Android NDK
         if: inputs.name == 'Android'
         shell: bash
@@ -57,28 +62,18 @@ jobs:
           echo "Extracting Android NDK r28..."
           tar -xf android-ndk.tar.xz
           echo "NDK r28 successfully downloaded and extracted!"
-
-      - name: Setup MSVC Arm64
-        if: inputs.name == 'Windows ARM64'
-        uses: TheMrMilchmann/setup-msvc-dev@v3
-        with:
-          arch: amd64_arm64
-
-      - name: Install libVLC
-        if: contains(inputs.name, 'Linux')
-        run: sudo apt install libvlc-dev libvlccore-dev
-
       - name: Install Libraries
-        run: ${{ inputs.setupCommand }}
+        run: |
+          haxelib install hmm --quiet
+          haxelib run hmm install --quiet
 
       - name: Configure Android
         if: inputs.name == 'Android'
         run: |
           haxelib run lime config ANDROID_SDK $ANDROID_HOME
           haxelib run lime config ANDROID_NDK_ROOT ${{ runner.temp }}/android-ndk-r28
-          haxelib run lime config JAVA_HOME $JAVA_HOME_17_arm64
+          haxelib run lime config JAVA_HOME $JAVA_HOME_17_X64
           haxelib run lime config ANDROID_SETUP true
-
       - name: Compile
         run: haxelib run lime build ${{ inputs.buildArgs }}
 
@@ -89,7 +84,6 @@ jobs:
           mkdir Payload
           mv *.app Payload
           zip -r ${{ env.PROJECT_NAME }}.ipa Payload
-
       - name: Upload Artifact
         uses: actions/upload-artifact@main
         with:
