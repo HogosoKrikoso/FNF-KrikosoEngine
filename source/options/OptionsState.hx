@@ -11,7 +11,7 @@ import sys.thread.Mutex;
 
 class OptionsState extends MusicBeatState
 {
-	var options:Array<String> = ['Note Colors', 'Controls', 'Adjust Delay and Combo', 'Graphics', 'Visuals and UI', 'Gameplay', 'Mobile Options'];
+	var options:Array<String> = ['Note Colors', 'Controls', 'Adjust Delay and Combo', 'Graphics', 'Visuals and UI', 'Gameplay', 'Mobile Options', 'Mobile Controls', 'Krikoso Engine'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
@@ -36,6 +36,10 @@ class OptionsState extends MusicBeatState
 				MusicBeatState.switchState(new options.NoteOffsetState());
 			case 'Mobile Options':
 				openSubState(new mobile.options.MobileOptionsSubState());
+			case 'Mobile Controls':
+				openSubState(new MobileControlSelectSubState());
+			case 'Krikoso Engine':
+				openSubState(new options.KrikosoOptionsSubState());
 		}
 	}
 
@@ -54,24 +58,14 @@ class OptionsState extends MusicBeatState
 		bg.screenCenter();
 		add(bg);
 
-		if (controls.mobileC)
-		{
-			var tipText:FlxText = new FlxText(150, FlxG.height - 24, 0, 'Press ' + (FlxG.onMobile ? 'C' : 'CTRL or C') + ' to Go Mobile Controls Menu', 16);
-			tipText.setFormat("VCR OSD Mono", 17, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-			tipText.borderSize = 1.25;
-			tipText.scrollFactor.set();
-			tipText.antialiasing = ClientPrefs.data.antialiasing;
-			add(tipText);
-		}
-
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
 		for (i in 0...options.length)
 		{
-			var optionText:Alphabet = new Alphabet(65, 0, options[i], true);
+			var optionText:Alphabet = new Alphabet(65, 10, options[i], true);
 			optionText.screenCenter(Y);
-			optionText.y += (100 * (i - (options.length / 2))) + 50;
+			optionText.y += (75 * i);
 			grpOptions.add(optionText);
 		}
 
@@ -111,14 +105,8 @@ class OptionsState extends MusicBeatState
 			changeSelection(1);
 		}
 
-		if (touchPad.buttonC.justPressed || FlxG.keys.justPressed.CONTROL && controls.mobileC)
-		{
-			persistentUpdate = false;
-			openSubState(new MobileControlSelectSubState());
-		}
-
 		if (controls.BACK) {
-            exiting = true;
+                        exiting = true;
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			if(onPlayState)
 			{
@@ -151,6 +139,7 @@ class OptionsState extends MusicBeatState
 				selectorLeft.x = item.x - 63;
 				selectorLeft.y = item.y;
 			}
+			item.offset.y = 75*item.targetY
 		}
 		FlxG.sound.play(Paths.sound('scrollMenu'));
 	}
