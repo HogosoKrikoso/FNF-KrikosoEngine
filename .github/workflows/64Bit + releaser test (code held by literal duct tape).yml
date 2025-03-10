@@ -1,6 +1,12 @@
 name: 64 Bits Releaser
-
 on: workflow_dispatch
+
+permissions:
+  contents: write
+  discussions: write
+
+env:
+  PROJECT_NAME: KrikosoEngine
 
 jobs:
   Build:
