@@ -66,13 +66,13 @@ class OptionsState extends MusicBeatState
 
 		for (i in 0...options.length)
 		{
-			var optionText:Alphabet = new Alphabet(65, 10, options[i], true);
+			var optionText:Alphabet = new Alphabet(200, 200, options[i], true);
 			optionText.screenCenter(Y);
 			optionText.y += (75 * i);
 			grpOptions.add(optionText);
 		}
 
-		selectorLeft = new Alphabet(5, 10, '>', true);
+		selectorLeft = new Alphabet(135, 200, '>', true);
 		add(selectorLeft);
 
 		changeSelection();
@@ -102,11 +102,8 @@ class OptionsState extends MusicBeatState
 		super.update(elapsed);
 
 		lerpSelected = FlxMath.lerp(curSelected, lerpSelected, Math.exp(-elapsed * 9.6));
-
-		var bullShit:Int = 0;
 		for (item in grpOptions.members) {
-			item.y = 10 + (75 * (bullShit - lerpSelected));
-			bullShit++;
+			item.offset.y = (75 * lerpSelected);
 		}
 
 		if (!exiting) {
