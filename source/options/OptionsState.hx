@@ -43,8 +43,6 @@ class OptionsState extends MusicBeatState
 				openSubState(new MobileControlSelectSubState());
 			case 'Krikoso Engine':
 				openSubState(new options.KrikosoOptionsSubState());
-			case 'Gameplay Modifiers':
-				openSubState(new options.GameplayChangersSubstate());
 		}
 	}
 
