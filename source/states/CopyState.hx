@@ -47,7 +47,7 @@ class CopyState extends MusicBeatState
 	public var loadingImage:FlxSprite;
 	public var loadingBar:FlxBar;
 	public var loadedText:FlxText;
-	public var curFileText:FlxText;
+	//public var curFileText:FlxText;
 	public var thread:ThreadPool;
 
 	var failedFilesStack:Array<String> = [];
@@ -83,13 +83,13 @@ class CopyState extends MusicBeatState
 		loadingBar.setRange(0, maxLoopTimes);
 		add(loadingBar);
 
-		loadedText = new FlxText(loadingBar.x, loadingBar.y - 28, FlxG.width, '', 16);
-		loadedText.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER);
+		loadedText = new FlxText(loadingBar.x, loadingBar.y + 3, FlxG.width, '', 16);
+		loadedText.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, LEFT);
 		add(loadedText);
 		
-		curFileText = new FlxText(loadingBar.x, loadingBar.y + 3, FlxG.width, '', 16);
-		curFileText.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER);
-		add(curFileText);
+		//curFileText = new FlxText(loadingBar.x, loadingBar.y + 3, FlxG.width, '', 16);
+		//curFileText.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER);
+		//add(curFileText);
 
 		thread = new ThreadPool(0, CoolUtil.getCPUThreadsCount(), MULTI_THREADED);
 		new FlxTimer().start(0.5, (tmr) -> {
@@ -98,7 +98,7 @@ class CopyState extends MusicBeatState
 				{
 					loopTimes++;
 					copyAsset(file);
-			                curFileText.text = "Copying asset:" + file;
+			                //curFileText.text = "Copying asset:" + file;
 				}
 			}, null);
 		});
@@ -128,7 +128,7 @@ class CopyState extends MusicBeatState
 				canUpdate = false;
 			}
 
-			if (loopTimes >= maxLoopTimes)
+			if (loopTimes >= maxLoopTimes) 
 				loadedText.text = "Completed!";
 			else
 				loadedText.text = '$loopTimes/$maxLoopTimes';
