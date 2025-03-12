@@ -105,8 +105,8 @@ class OptionsState extends MusicBeatState
 
 		var idx:Int = 0;
 		for (item in grpOptions.members) {
+			item.y = 200 + (75 * (idx - lerpSelected));
 			idx++;
-			item.y = 200 - (75 * (idx - lerpSelected));
 		}
 
 		if (!exiting) {
