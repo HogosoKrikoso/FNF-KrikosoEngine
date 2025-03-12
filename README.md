@@ -9,4 +9,4 @@ Engine Folder:
 (make sure to create that folder when the game warns you about it)
 
 
-[Old Version](https://github.com/HogMedioScorched/FNF-PsychEngine-Mobile-HogsTake/)
+[Old and Shitty Version](https://github.com/HogMedioScorched/FNF-PsychEngine-Mobile-HogsTake/)
