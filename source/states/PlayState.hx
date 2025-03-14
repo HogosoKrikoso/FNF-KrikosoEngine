@@ -175,6 +175,7 @@ class PlayState extends MusicBeatState
 
 	public var gfSpeed:Int = 1;
 	public var health(default, set):Float = 1;
+	public var smoothHealth:Float = 1;
 	public var combo:Int = 0;
 
 	public var healthBar:Bar;
@@ -540,7 +541,7 @@ class PlayState extends MusicBeatState
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 		moveCameraSection();
 
-		healthBar = new Bar(0, FlxG.height * (!ClientPrefs.data.downScroll ? 0.89 : 0.11), 'healthBar', function() return health, 0, 2);
+		healthBar = new Bar(0, FlxG.height * (!ClientPrefs.data.downScroll ? 0.89 : 0.11), 'healthBar', function() return smoothHealth, 0, 2);
 		healthBar.screenCenter(X);
 		healthBar.leftToRight = false;
 		healthBar.scrollFactor.set();
@@ -1721,6 +1722,7 @@ class PlayState extends MusicBeatState
 
 		updateIconsScale(elapsed);
 		updateIconsPosition();
+		updateHealthBar();
 
 		if (startedCountdown && !paused)
 		{
@@ -1887,6 +1889,12 @@ class PlayState extends MusicBeatState
 		var iconOffset:Int = 26;
 		iconP1.x = healthBar.barCenter + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
 		iconP2.x = healthBar.barCenter - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
+	}
+
+	public dynamic function updateHealthBar()
+	{
+		var mult:Float = FlxMath.lerp(smoothHealth, health, 0.1);
+                smoothHealth = mult;
 	}
 
 	var iconsAnimations:Bool = true;
