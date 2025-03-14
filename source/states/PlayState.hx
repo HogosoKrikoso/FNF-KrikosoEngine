@@ -660,9 +660,9 @@ class PlayState extends MusicBeatState
 		cacheCountdown();
 		cachePopUpScore();
 
-		#if (!android)
-		addTouchPad("NONE", "P");
- 		addTouchPadCamera();
+		#if mobile
+		        addTouchPad("NONE", "P");
+ 		        addTouchPadCamera();
 		#end
 
 		super.create();
