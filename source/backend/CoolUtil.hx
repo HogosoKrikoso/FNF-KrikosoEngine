@@ -152,11 +152,11 @@ class CoolUtil
 		since newer flixel versions are being enforced anyways.
 		@crowplexus
 	**/
-	@:access(flixel.util.FlxSave.validate)
+	//@:access(flixel.util.FlxSave.validate)
 	inline public static function getSavePath():String {
-		final company:String = FlxG.stage.application.meta.get('company');
+		//final company:String = FlxG.stage.application.meta.get('company');
 		// #if (flixel < "5.0.0") return company; #else
-		return '${company}/${flixel.util.FlxSave.validate(FlxG.stage.application.meta.get('file'))}';
+		return Sys.getCwd();
 		// #end
 	}
 
