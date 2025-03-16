@@ -136,14 +136,18 @@ class Song
 				daSong = songData.song;
 				daBpm = songData.bpm; */
 
-		var songJson:Dynamic = parseJSONshit(rawJson);
+		var parsedJson:Dynamic = parseJSON(rawJson);
+		var songJson:Dynamic = parsedJson;
+		if (parsedJson.song != null) {
+		        songJson = parsedJson.song;
+		}
 		if(jsonInput != 'events') StageData.loadDirectory(songJson);
 		onLoadJson(songJson);
 		return songJson;
 	}
 
-	public static function parseJSONshit(rawJson:String):SwagSong
+	public static function parseJSON(rawJson:String):SwagSong
 	{
-		return cast Json.parse(rawJson).song;
+		return cast Json.parse(rawJson);
 	}
 }
