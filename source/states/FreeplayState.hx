@@ -132,11 +132,11 @@ class FreeplayState extends MusicBeatState
 		scoreText = new FlxText(0, 5, 0, "", 32);
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
 
-		scoreBG = FlxSpriteUtil.drawRoundRect(new FlxSprite(0, 0).makeGraphic(FlxG.width, 66, FlxColor.TRANSPARENT), 0, 0, FlxG.width, 66, 15, 15, FlxColor.BLACK);
+		scoreBG = FlxSpriteUtil.drawRoundRect(new FlxSprite(0, 0).makeGraphic(FlxG.width, 42, FlxColor.TRANSPARENT), 0, 0, FlxG.width, 42, 15, 15, FlxColor.BLACK);
 		scoreBG.alpha = 0.6;
 		add(scoreBG);
 
-		diffText = new FlxText(scoreText.x, scoreText.y + 36, 0, "", 24);
+		diffText = new FlxText(scoreText.x, scoreText.y + 45, 0, "", 24);
 		diffText.font = scoreText.font;
 		add(diffText);
 
@@ -478,6 +478,27 @@ class FreeplayState extends MusicBeatState
 		positionHighscore();
 		missingText.visible = false;
 		missingTextBG.visible = false;
+
+		var diffColor:Int = 0xFFFFFFFF;
+		var upperDiff:String = lastDifficultyName.toUpperCase();
+		if(upperDiff == "EASY") {
+			diffColor = 0xFF00FF00;
+		}
+		if(upperDiff == "NORMAL") {
+			diffColor = 0xFFFFFF00;
+		}
+		if(upperDiff == "HARD") {
+			diffColor = 0xFFFF0000;
+		}
+		if(diffColorTween != null) {
+			diffColorTween.cancel();
+		}
+		diffColorTween = FlxTween.color(diffText, 0.5, diffText.color, diffColor, {
+			onComplete: function(twn:FlxTween) {
+				diffColorTween = null;
+			}
+		});
+		
 	}
 
 	function changeSelection(change:Int = 0, playSound:Bool = true)
@@ -554,7 +575,7 @@ class FreeplayState extends MusicBeatState
 
 	private function positionHighscore() {
 		scoreText.x = (FlxG.width - scoreText.width)/2;
-		diffText.x = (FlxG.width - diffText.width)/2;
+		diffText.x = scoreText.x;
 	}
 
 	var _drawDistance:Int = 4;
