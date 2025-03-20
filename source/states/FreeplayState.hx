@@ -43,6 +43,7 @@ class FreeplayState extends MusicBeatState
 	var bg:FlxSprite;
 	var intendedColor:Int;
 	var colorTween:FlxTween;
+	var diffColorTween:FlxTween;
 
 	var missingTextBG:FlxSprite;
 	var missingText:FlxText;
