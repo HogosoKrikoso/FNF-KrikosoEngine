@@ -23,6 +23,7 @@ class MusicPlayer extends FlxGroup
 	var songBG:FlxSprite;
 	var songTxt:FlxText;
 	var timeTxt:FlxText;
+	var progressBG:FlxSprite;
 	var progressBar:FlxBar;
 	var playbackBG:FlxSprite;
 	var playbackSymbols:Array<FlxText> = [];
@@ -45,7 +46,7 @@ class MusicPlayer extends FlxGroup
 		songBG.alpha = 0.6;
 		add(songBG);
 
-		playbackBG = new FlxSprite(xPos - 6, 0).makeGraphic(1, 100, 0xFF000000);
+		playbackBG = new FlxSprite(xPos - 6, 0).makeGraphic(1, 75, 0xFF000000);
 		playbackBG.alpha = 0.6;
 		add(playbackBG);
 
@@ -69,7 +70,10 @@ class MusicPlayer extends FlxGroup
 			add(text);
 		}
 
-		progressBar = new FlxBar(timeTxt.x, timeTxt.y + timeTxt.height, LEFT_TO_RIGHT, Std.int(timeTxt.width), 8, null, "", 0, Math.POSITIVE_INFINITY);
+		progressBG = new FlxSprite(5, FlxG.height - 39).makeGraphic(FlxG.width - 10, 44, 0xFF000000);
+		add(progressBG);
+		
+		progressBar = new FlxBar(10, FlxG.height - 29, LEFT_TO_RIGHT, FlxG.width - 20, 24, null, "", 0, Math.POSITIVE_INFINITY);
 		progressBar.createFilledBar(FlxColor.WHITE, FlxColor.BLACK);
 		add(progressBar);
 
