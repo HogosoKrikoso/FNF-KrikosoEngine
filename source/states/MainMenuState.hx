@@ -70,7 +70,7 @@ class MainMenuState extends MusicBeatState
 
 		for (i in 0...optionShit.length)
 		{
-			var menuItem:FlxSprite = new FlxSprite(100+(100*i), (i * 140));
+			var menuItem:FlxSprite = new FlxSprite(100, (i * 140));
 			menuItem.antialiasing = ClientPrefs.data.antialiasing;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
@@ -78,6 +78,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.play('idle');
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set(1, 1);
+			menuItem.screenCenter(X);
 			menuItem.updateHitbox();
 		}
 
@@ -211,6 +212,7 @@ class MainMenuState extends MusicBeatState
 		FlxG.sound.play(Paths.sound('scrollMenu'));
 		menuItems.members[curSelected].animation.play('idle');
 		menuItems.members[curSelected].updateHitbox();
+		menuItem.screenCenter(X);
 
 		curSelected += huh;
 
@@ -221,6 +223,7 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.members[curSelected].animation.play('selected');
 		menuItems.members[curSelected].centerOffsets();
+		menuItem.screenCenter(X);
 
 		camFollow.setPosition(menuItems.members[curSelected].getGraphicMidpoint().x, menuItems.members[curSelected].getGraphicMidpoint().y);
 	}
