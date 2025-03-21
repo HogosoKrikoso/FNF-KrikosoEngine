@@ -10,6 +10,15 @@ class KrikosoOptionsSubState extends BaseOptionsMenu
 	{
 		title = 'Krikoso Engine';
 		rpcTitle = 'Krikoso Engine Menu'; //for Discord Rich Presence
+
+		#if android
+		var option:Option = new Option('Storage Folder:',
+			"What Folder should the engine use?",
+			'storageFolder',
+			'string',
+			['Krikoso Engine', 'Psych Engine', 'NovaFlare Engine', 'Data', 'Media', 'Obb']);
+		addOption(option);
+		#end
 		
 		var option:Option = new Option('Score Text Separator:',
 			"What separator should use the Score Text?",
