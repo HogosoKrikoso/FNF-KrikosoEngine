@@ -22,6 +22,8 @@
 
 package mobile.backend;
 
+import backend.ClientPrefs;
+
 /**
  * A storage class for mobile.
  * @author Karim Akra and Lily Ross (mcagabe19)
@@ -29,9 +31,37 @@ package mobile.backend;
 class StorageUtil
 {
 	#if sys
-	public static function getStorageDirectory():String
-		return #if android haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/.KrikosoEngine') #elseif ios lime.system.System.documentsDirectory #else Sys.getCwd() #end;
-
+	public static function getStorageDirectory():String {
+		var path:String = '';
+		#if android
+			var storageFolder:String = ClientPrefs.data.storageFolder;
+			switch(storageFolder) {
+				case 'NovaFlare Engine' {
+					path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/.NF Engine');
+				}
+				case 'Psych Engine' {
+					path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/.PsychEngine');
+				}
+				case 'Krikoso Engine' {
+					path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/.KrikosoEngine');
+				}
+				case 'Data' {
+					path = haxe.io.Path.addTrailingSlash(AndroidContext.getExternalFilesDir());
+		           	}
+				case 'Obb' {
+				        path = haxe.io.Path.addTrailingSlash(AndroidContext.getObbDir());
+		              	}
+				case 'Media' {
+				        path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/Android/media/' + lime.app.Application.current.meta.get('packageName'));
+		        	}
+			}
+		#elseif ios
+			path = lime.system.System.documentsDirectory;
+		#else
+			path = Sys.getCwd();
+		#end
+		return path;
+	}
 	public static function saveContent(fileName:String, fileData:String, ?alert:Bool = true):Void
 	{
 		try
@@ -81,4 +111,5 @@ class StorageUtil
 	}
 	#end
 	#end
-}
+			}
+		
