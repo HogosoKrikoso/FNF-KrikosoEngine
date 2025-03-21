@@ -5,6 +5,7 @@ import openfl.text.TextField;
 import openfl.text.TextFormat;
 import openfl.system.System as OpenFlSystem;
 import lime.system.System as LimeSystem;
+import backend.Paths;
 
 /**
 	The FPS class provides an easy-to-use monitor to display
@@ -51,7 +52,7 @@ class FPSCounter extends TextField
 		currentFPS = 0;
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat("_sans", 14, color);
+		defaultTextFormat = new TextFormat(Paths.font("vcr.ttf"), 14, color);
 		width = FlxG.width;
 		multiline = true;
 		text = "FPS: ";
