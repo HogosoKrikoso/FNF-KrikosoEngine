@@ -25,7 +25,6 @@ class MusicPlayer extends FlxGroup
 	var timeTxt:FlxText;
 	var progressBG:FlxSprite;
 	var progressBar:FlxBar;
-	var playbackBG:FlxSprite;
 	var playbackSymbols:Array<FlxText> = [];
 	var playbackTxt:FlxText;
 
@@ -40,15 +39,9 @@ class MusicPlayer extends FlxGroup
 
 		this.instance = instance;
 
-		var xPos:Float = FlxG.width * 0.7;
-
-		songBG = new FlxSprite(xPos - 6, 0).makeGraphic(1, 100, 0xFF000000);
+		songBG = new FlxSprite(0, 0).makeGraphic(FlxG.width, 100, 0xFF000000);
 		songBG.alpha = 0.6;
 		add(songBG);
-
-		playbackBG = new FlxSprite(xPos - 6, 0).makeGraphic(1, 75, 0xFF000000);
-		playbackBG.alpha = 0.6;
-		add(playbackBG);
 
 		songTxt = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
 		songTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
@@ -70,11 +63,11 @@ class MusicPlayer extends FlxGroup
 			add(text);
 		}
 
-		progressBG = new FlxSprite(5, FlxG.height - 39).makeGraphic(FlxG.width - 10, 44, 0xFF000000);
+		progressBG = new FlxSprite(5, FlxG.height - 59).makeGraphic(FlxG.width - 10, 44, 0xFF000000);
 		add(progressBG);
 		
-		progressBar = new FlxBar(10, FlxG.height - 29, LEFT_TO_RIGHT, FlxG.width - 20, 24, null, "", 0, Math.POSITIVE_INFINITY);
-		progressBar.createFilledBar(FlxColor.WHITE, FlxColor.BLACK);
+		progressBar = new FlxBar(10, FlxG.height - 49, LEFT_TO_RIGHT, FlxG.width - 20, 24, null, "", 0, Math.POSITIVE_INFINITY);
+		progressBar.createFilledBar(FlxColor.BLACK, FlxColor.WHITE);
 		add(progressBar);
 
 		playbackTxt = new FlxText(FlxG.width * 0.6, 20, 0, "", 32);
@@ -300,30 +293,13 @@ class MusicPlayer extends FlxGroup
 		songTxt.x = FlxG.width - songTxt.width - 6;
 		if (shortName)
 			songTxt.x -= 10 * length - length;
-		songBG.scale.x = FlxG.width - songTxt.x + 12;
-		if (shortName) 
-			songBG.scale.x += 6 * length;
-		songBG.x = FlxG.width - (songBG.scale.x / 2);
 		timeTxt.x = Std.int(songBG.x + (songBG.width / 2));
 		timeTxt.x -= timeTxt.width / 2;
 		if (shortName)
 			timeTxt.x -= length - 5;
 
-		playbackBG.scale.x = playbackTxt.width + 30;
-		playbackBG.x = songBG.x - (songBG.scale.x / 2);
-		playbackBG.x -= playbackBG.scale.x;
-
-		playbackTxt.x = playbackBG.x - playbackTxt.width / 2;
+		playbackTxt.x = songTxt.x - (playbackTxt.width * 1.25);
 		playbackTxt.y = playbackTxt.height;
-
-		progressBar.setGraphicSize(Std.int(songTxt.width), 5);
-		progressBar.y = songTxt.y + songTxt.height + 10;
-		progressBar.x = songTxt.x + songTxt.width / 2 - 15;
-		if (shortName)
-		{
-			progressBar.scale.x += length / 2;
-			progressBar.x -= length - 10;
-		}
 
 		for (i in 0...2)
 		{
