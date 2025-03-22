@@ -36,24 +36,18 @@ class StorageUtil
 		#if android
 			var storageFolder:String = ClientPrefs.data.storageFolder;
 			switch(storageFolder) {
-				case 'NovaFlare Engine': {
+				case 'NovaFlare Engine':
 					path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/.NF Engine');
-				}
-				case 'Psych Engine'; {
+				case 'Psych Engine':
 					path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/.PsychEngine');
-				}
-				case 'Krikoso Engine': {
+				case 'Krikoso Engine': 
 					path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/.KrikosoEngine');
-				}
-				case 'Data': {
+				case 'Data': 
 					path = haxe.io.Path.addTrailingSlash(AndroidContext.getExternalFilesDir());
-		           	}
-				case 'Obb': {
+				case 'Obb':
 				        path = haxe.io.Path.addTrailingSlash(AndroidContext.getObbDir());
-		              	}
-				case 'Media': {
+				case 'Media':
 				        path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/Android/media/' + lime.app.Application.current.meta.get('packageName'));
-		        	}
 			}
 		#elseif ios
 			path = lime.system.System.documentsDirectory;
