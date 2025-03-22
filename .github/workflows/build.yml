@@ -9,6 +9,12 @@ on:
       os:
         required: true
         type: string
+      method:
+        required: true
+        type: string
+      setupCommand:
+        required: true
+        type: string
       buildArgs:
         required: true
         type: string
@@ -20,8 +26,8 @@ on:
         type: string
 
 env:
-  HAXE_VERSION: 4.3.2
-  PROJECT_NAME: KrikosoEngine
+  HAXE_VERSION: 4.3.6
+  PROJECT_NAME: PsychEngine
 
 jobs:
   build:
@@ -32,54 +38,57 @@ jobs:
         uses: actions/checkout@main
 
       - name: Setup Haxe
-        if: inputs.name != 'Linux ARM64'
+        if: inputs.method != 'linux64'
         uses: krdlab/setup-haxe@master
         with:
           haxe-version: ${{ env.HAXE_VERSION }}
 
       - name: Setup Haxe (Linux ARM64 Workaround)
-        if: inputs.name == 'Linux ARM64'
+        if: inputs.method == 'linux64'
         run: |
           sudo add-apt-repository ppa:haxe/releases -y
           sudo apt-get update
           sudo apt install haxe -y
-          haxelib setup ~/haxelib
-      - name: Setup MSVC Arm64
-        if: inputs.name == 'Windows ARM64'
-        uses: TheMrMilchmann/setup-msvc-dev@v3
-        with:
-          arch: amd64_arm64
-      - name: Install libVLC
-        if: contains(inputs.name, 'Linux')
-        run: sudo apt install libvlc-dev libvlccore-dev
+
       - name: Setup Android NDK
-        if: inputs.name == 'Android'
+        if: inputs.method == 'android'
         uses: nttld/setup-ndk@main
         with:
           ndk-version: r29-beta1
           add-to-path: false
+
+      - name: Setup MSVC ARM64
+        if: inputs.method == 'win64'
+        uses: TheMrMilchmann/setup-msvc-dev@v3
+        with:
+          arch: amd64_arm64
+
+      - name: Install libVLC
+        if: contains(inputs.method, 'linux')
+        run: sudo apt install libvlc-dev libvlccore-dev
+
       - name: Install Libraries
-        run: |
-          haxelib install hmm --quiet
-          haxelib run hmm install --quiet
+        run: ${{ inputs.setupCommand }}
 
       - name: Configure Android
-        if: inputs.name == 'Android'
+        if: inputs.method == 'android'
         run: |
           haxelib run lime config ANDROID_SDK $ANDROID_HOME
-          haxelib run lime config ANDROID_NDK_ROOT ${{ runner.temp }}/android-ndk-r28
-          haxelib run lime config JAVA_HOME $JAVA_HOME_17_X64
+          haxelib run lime config ANDROID_NDK_ROOT ${{ steps.setup-ndk.outputs.ndk-path }}
+          haxelib run lime config JAVA_HOME $JAVA_HOME_17_arm64
           haxelib run lime config ANDROID_SETUP true
+
       - name: Compile
         run: haxelib run lime build ${{ inputs.buildArgs }}
 
       - name: Make IPA
-        if: inputs.name == 'iOS'
+        if: inputs.method == 'ios'
         run: |
           cd export/release/ios/build/Release-iphoneos
           mkdir Payload
           mv *.app Payload
           zip -r ${{ env.PROJECT_NAME }}.ipa Payload
+
       - name: Upload Artifact
         uses: actions/upload-artifact@main
         with:
