@@ -47,7 +47,7 @@ class MusicPlayer extends FlxGroup
 		songTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
 		add(songTxt);
 
-		timeTxt = new FlxText(xPos, songTxt.y + 60, 0, "", 32);
+		timeTxt = new FlxText(FlxG.width * 0.7, songTxt.y + 32, 0, "", 32);
 		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
 		add(timeTxt);
 
@@ -234,7 +234,7 @@ class MusicPlayer extends FlxGroup
 		active = visible = playingMusic;
 
 		instance.scoreBG.visible = instance.diffText.visible = instance.scoreText.visible = !playingMusic; //Hide Freeplay texts and boxes if playingMusic is true
-		songTxt.visible = timeTxt.visible = songBG.visible = playbackTxt.visible = playbackBG.visible = progressBar.visible = playingMusic; //Show Music Player texts and boxes if playingMusic is true
+		songTxt.visible = timeTxt.visible = songBG.visible = playbackTxt.visible = progressBar.visible = progressBG.visible = playingMusic; //Show Music Player texts and boxes if playingMusic is true
 
 		for (i in playbackSymbols)
 			i.visible = playingMusic;
