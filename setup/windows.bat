@@ -10,8 +10,8 @@ haxelib git flixel https://github.com/MobilePorting/flixel 5.6.1 --quiet
 haxelib install flixel-addons 3.2.2 --quiet
 haxelib install flixel-tools 1.5.1 --quiet
 haxelib install flixel-ui --quiet
-haxelib install SScript 7.7.0 --quiet
 haxelib install tjson 1.4.0 --quiet
+haxelib git https://github.com/MobilePorting/SScript-7.7.0.git
 haxelib git flxanimate https://github.com/Dot-Stuff/flxanimate 768740a56b26aa0c072720e0d1236b94afe68e3e --quiet
 haxelib git linc_luajit https://github.com/MobilePorting/linc_luajit --quiet
 haxelib git hxdiscord_rpc https://github.com/MobilePorting/hxdiscord_rpc --quiet --skip-dependencies
