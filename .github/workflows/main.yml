@@ -15,6 +15,13 @@ jobs:
             setupCommand: .\"setup/windows.bat"
             artifactName: windowsBuild-x86_64
             artifactPath: export\release\windows\bin\*
+          - name: Linux
+            os: ubuntu-22.04
+            method: linux
+            buildArgs: linux
+            setupCommand: sh ./setup/unix.sh
+            artifactName: linuxBuild-x86_64
+            artifactPath: export/release/linux/bin/
           - name: macOS x86_64
             os: macos-14
             method: none
