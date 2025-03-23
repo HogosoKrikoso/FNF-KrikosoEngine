@@ -87,6 +87,7 @@ class FunkinLua {
 		set('luaDebugMode', false);
 		set('luaDeprecatedWarnings', true);
 		set('inChartEditor', false);
+		set('isKrikosoLua', true);
 
 		// Song/Week shit
 		set('curBpm', Conductor.bpm);
