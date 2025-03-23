@@ -307,7 +307,7 @@ class Tank extends BaseStage
 				pico.anim.onComplete = function()
 				{
 					pico.anim.play('picoEnd', true);
-					pico.anim.onComplete = function()
+					pico.anim.onComplete = function():flixel.util.FlxSignal
 					{
 						gfGroup.alpha = 1;
 						pico.visible = false;
