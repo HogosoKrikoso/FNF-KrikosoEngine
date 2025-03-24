@@ -43,12 +43,12 @@ class MusicPlayer extends FlxGroup
 		songBG.alpha = 0.6;
 		add(songBG);
 
-		songTxt = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
-		songTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
+		songTxt = new FlxText(FlxG.width * 0.7, 18, 0, "", 32);
+		songTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, LEFT);
 		add(songTxt);
 
 		timeTxt = new FlxText(FlxG.width * 0.7, songTxt.y + 32, 0, "", 32);
-		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
+		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, LEFT);
 		add(timeTxt);
 
 		for (i in 0...2)
@@ -63,10 +63,10 @@ class MusicPlayer extends FlxGroup
 			add(text);
 		}
 
-		progressBG = new FlxSprite(5, FlxG.height - 59).makeGraphic(FlxG.width - 10, 44, 0xFF000000);
+		progressBG = new FlxSprite(5, FlxG.height - 79).makeGraphic(FlxG.width - 10, 44, 0xFF000000);
 		add(progressBG);
 		
-		progressBar = new FlxBar(10, FlxG.height - 49, LEFT_TO_RIGHT, FlxG.width - 20, 24, null, "", 0, Math.POSITIVE_INFINITY);
+		progressBar = new FlxBar(10, FlxG.height - 69, LEFT_TO_RIGHT, FlxG.width - 20, 24, null, "", 0, Math.POSITIVE_INFINITY);
 		progressBar.createFilledBar(FlxColor.BLACK, FlxColor.WHITE);
 		add(progressBar);
 
@@ -288,17 +288,9 @@ class MusicPlayer extends FlxGroup
 
 	function positionSong() 
 	{
-		var length:Int = instance.songs[FreeplayState.curSelected].songName.length;
-		var shortName:Bool = length < 5; // Fix for song names like Ugh, Guns
-		songTxt.x = FlxG.width - songTxt.width - 6;
-		if (shortName)
-			songTxt.x -= 10 * length - length;
-		timeTxt.x = Std.int(songBG.x + (songBG.width / 2));
-		timeTxt.x -= timeTxt.width / 2;
-		if (shortName)
-			timeTxt.x -= length - 5;
-
-		playbackTxt.x = songTxt.x - (playbackTxt.width * 1.25);
+		songTxt.x = 10;
+		timeTxt.x = songBG.x;
+		playbackTxt.x = (FlxG.width - playbackTxt.width) / 2;
 		playbackTxt.y = playbackTxt.height;
 
 		for (i in 0...2)
