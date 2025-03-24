@@ -150,7 +150,7 @@ class FlxInputText extends FlxText
 	/**
 	 * The color of the background of the textbox.
 	 */
-	public var backgroundColor(default, set):Int = FlxColor.WHITE;
+	public var backgroundColor(default, set):Int = FlxColor.BLACK;
 
 	/**
 	 * A FlxSprite representing the background sprite
@@ -195,7 +195,7 @@ class FlxInputText extends FlxText
 	 * @param	BackgroundColor	The color of the background (FlxColor.TRANSPARENT for no background color)
 	 * @param	EmbeddedFont	Whether this text field uses embedded fonts or not
 	 */
-	public function new(X:Float = 0, Y:Float = 0, Width:Int = 150, ?Text:String, size:Int = 8, TextColor:Int = FlxColor.BLACK,
+	public function new(X:Float = 0, Y:Float = 0, Width:Int = 150, ?Text:String, size:Int = 8, TextColor:Int = FlxColor.WHITE,
 			BackgroundColor:Int = FlxColor.WHITE, EmbeddedFont:Bool = true)
 	{
 		super(X, Y, Width, Text, size, EmbeddedFont);
