@@ -52,7 +52,7 @@ class FPSCounter extends TextField
 		currentFPS = 0;
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat(Paths.font("vcr.ttf"), 14, color);
+		defaultTextFormat = new TextFormat(Paths.font("vcr.ttf"), 20, color);
 		width = FlxG.width;
 		multiline = true;
 		text = "FPS: ";
