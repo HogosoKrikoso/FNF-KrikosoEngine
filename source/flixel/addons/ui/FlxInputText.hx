@@ -196,7 +196,7 @@ class FlxInputText extends FlxText
 	 * @param	EmbeddedFont	Whether this text field uses embedded fonts or not
 	 */
 	public function new(X:Float = 0, Y:Float = 0, Width:Int = 150, ?Text:String, size:Int = 8, TextColor:Int = FlxColor.WHITE,
-			BackgroundColor:Int = FlxColor.WHITE, EmbeddedFont:Bool = true)
+			BackgroundColor:Int = FlxColor.BLACK, EmbeddedFont:Bool = true)
 	{
 		super(X, Y, Width, Text, size, EmbeddedFont);
 		backgroundColor = BackgroundColor;
