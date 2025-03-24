@@ -422,10 +422,8 @@ class FreeplayState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('confirmMenu'));
 
 			FlxFlicker.flicker(grpSongs.members[curSelected], 1, 0.06, false, false, function(flick:FlxFlicker) {
-			
-			LoadingState.prepareToSong();
+	
 			LoadingState.loadAndSwitchState(new PlayState());
-			stopMusicPlay = true;
 
 			FlxG.sound.music.volume = 0;
 					
