@@ -131,14 +131,14 @@ class FreeplayState extends MusicBeatState
 		WeekData.setDirectoryFromWeek();
 
 		scoreText = new FlxText(0, 5, 0, "", 32);
-		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 
 		scoreBG = FlxSpriteUtil.drawRoundRect(new FlxSprite(0, 0).makeGraphic(FlxG.width, 42, FlxColor.TRANSPARENT), 0, 0, FlxG.width, 42, 15, 15, FlxColor.BLACK);
 		scoreBG.alpha = 0.6;
 		add(scoreBG);
 
 		diffText = new FlxText(scoreText.x, scoreText.y + 45, 0, "", 24);
-		diffText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		diffText.setFormat(Paths.font("vcr.ttf"), 25, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(diffText);
 
 		add(scoreText);
@@ -214,6 +214,7 @@ class FreeplayState extends MusicBeatState
 	var instPlaying:Int = -1;
 	public static var vocals:FlxSound = null;
 	var holdTime:Float = 0;
+	var stopMusicPlay:Bool = false;
 	override function update(elapsed:Float)
 	{
 		if (FlxG.sound.music.volume < 0.7)
@@ -422,7 +423,9 @@ class FreeplayState extends MusicBeatState
 
 			FlxFlicker.flicker(grpSongs.members[curSelected], 1, 0.06, false, false, function(flick:FlxFlicker) {
 			
+			LoadingState.prepareToSong();
 			LoadingState.loadAndSwitchState(new PlayState());
+			stopMusicPlay = true;
 
 			FlxG.sound.music.volume = 0;
 					
@@ -490,6 +493,12 @@ class FreeplayState extends MusicBeatState
 		}
 		if(upperDiff == "HARD") {
 			diffColor = 0xFFFF0000;
+		}
+		if(upperDiff == "ERECT") {
+			diffColor = 0xFF00FFFF;
+		}
+		if(upperDiff == "NIGHTMARE") {
+			diffColor = 0xFF3300CC;
 		}
 		if(diffColorTween != null) {
 			diffColorTween.cancel();
@@ -577,6 +586,7 @@ class FreeplayState extends MusicBeatState
 	private function positionHighscore() {
 		scoreText.x = (FlxG.width - scoreText.width)/2;
 		diffText.x = scoreText.x;
+		curSongText.x = FlxG.width - curSongText.width;
 	}
 
 	var _drawDistance:Int = 4;
