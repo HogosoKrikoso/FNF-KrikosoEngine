@@ -75,10 +75,19 @@ class OptionsState extends MusicBeatState
 		selectorLeft = new Alphabet(135, 200, '>', true);
 		add(selectorLeft);
 
+		var titleBox:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, 60, FlxColor.BLACK);
+		titleBox.alpha = 0.6;
+		add(titleBox);
+
+		var titleText:Alphabet = new Alphabet(10, 10, "OPTIONS", true);
+		titleText.setScale(0.6);
+		titleText.alpha = 0.6;
+		add(titleText);
+
 		changeSelection();
 		ClientPrefs.saveSettings();
 
-		addTouchPad("UP_DOWN", "A_B_C");
+		addTouchPad("UP_DOWN", "A_B");
 
 		super.create();
 		
