@@ -40,7 +40,7 @@ class MobileOptionsSubState extends BaseOptionsMenu
 		rpcTitle = 'Mobile Options Menu'; // for Discord Rich Presence, fuck it
 
 		#if android
-		        lastStorageFolder = ClientPrefs.data.storageFolder;
+		        lastStorageFolder = File.getContent(lime.system.System.applicationStorageDirectory + 'storageFolder.txt');
 		#end
 			
 		option = new Option('Extra Controls', 'Select how many extra buttons you prefer to have?\nThey can be used for mechanics with LUA or HScript.',
