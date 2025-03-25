@@ -22,13 +22,6 @@ jobs:
             setupCommand: sh ./setup/unix.sh
             artifactName: linuxBuild-x86_64
             artifactPath: export/release/linux/bin/
-          - name: macOS x86_64
-            os: macos-14
-            method: none
-            setupCommand: sh ./setup/unix.sh
-            buildArgs: "mac -64 -D HXCPP_M64"
-            artifactName: macOSBuild-x86_64
-            artifactPath: export/release/macos/bin/*
           - name: macOS AArch64
             os: macos-15
             method: none
