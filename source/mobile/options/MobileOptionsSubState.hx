@@ -92,7 +92,7 @@ class MobileOptionsSubState extends BaseOptionsMenu
 			"What Folder should the engine use?\n(This will restart the game but the folder won't be deleted)",
 			'storageFolder',
 			'string',
-			['Krikoso Engine', 'Psych Engine', 'NovaFlare Engine', 'Data', 'Media', 'Obb']);
+			['Krikoso Engine', 'Psych Engine', 'Psych Online', 'NovaFlare Engine', 'Data', 'Media', 'Obb']);
 		addOption(option);
 		#end
 
