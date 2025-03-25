@@ -32,12 +32,15 @@ class MobileOptionsSubState extends BaseOptionsMenu
 	final exControlTypes:Array<String> = ["NONE", "SINGLE", "DOUBLE"];
 	final hintOptions:Array<String> = ["No Gradient", "No Gradient (Old)", "Gradient", "Hidden"];
 	var option:Option;
+	var lastStorageFolder:String = ""
 
 	public function new()
 	{
 		title = 'Mobile Options';
 		rpcTitle = 'Mobile Options Menu'; // for Discord Rich Presence, fuck it
 
+		lastStorageFolder = ClientPrefs.data.storageFolder
+			
 		option = new Option('Extra Controls', 'Select how many extra buttons you prefer to have?\nThey can be used for mechanics with LUA or HScript.',
 			'extraButtons', 'string', exControlTypes);
 		addOption(option);
@@ -84,6 +87,28 @@ class MobileOptionsSubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
+		#if android
+		var option:Option = new Option('Storage Folder:',
+			"What Folder should the engine use?\n(This will restart the game but the folder won't be deleted)",
+			'storageFolder',
+			'string',
+			['Krikoso Engine', 'Psych Engine', 'NovaFlare Engine', 'Data', 'Media', 'Obb']);
+		addOption(option);
+		#end
+
 		super();
+	}
+			
+	override public function destroy()
+	{
+		super.destroy();
+		#if android
+		if (ClientPrefs.data.storageFolder != lastStorageFolder)
+		{
+			File.saveContent(lime.system.System.applicationStorageDirectory + 'storageFolder.txt', ClientPrefs.data.storageFolder);
+			CoolUtil.showPopUp('Storage Type has been changed and you needed restart the game!!\nPress OK to close the game.', 'Notice!');
+			lime.system.System.exit(0);
+		}
+		#end
 	}
 }
