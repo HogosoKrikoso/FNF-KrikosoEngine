@@ -32,14 +32,14 @@ class MobileOptionsSubState extends BaseOptionsMenu
 	final exControlTypes:Array<String> = ["NONE", "SINGLE", "DOUBLE"];
 	final hintOptions:Array<String> = ["No Gradient", "No Gradient (Old)", "Gradient", "Hidden"];
 	var option:Option;
-	var lastStorageFolder:String = ""
+	var lastStorageFolder:String = "";
 
 	public function new()
 	{
 		title = 'Mobile Options';
 		rpcTitle = 'Mobile Options Menu'; // for Discord Rich Presence, fuck it
 
-		lastStorageFolder = ClientPrefs.data.storageFolder
+		lastStorageFolder = ClientPrefs.data.storageFolder;
 			
 		option = new Option('Extra Controls', 'Select how many extra buttons you prefer to have?\nThey can be used for mechanics with LUA or HScript.',
 			'extraButtons', 'string', exControlTypes);
