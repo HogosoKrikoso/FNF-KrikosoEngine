@@ -22,7 +22,7 @@
 
 package mobile.backend;
 
-import backend.ClientPrefs;
+import lime.system.System as LimeSystem;
 
 /**
  * A storage class for mobile.
@@ -31,10 +31,15 @@ import backend.ClientPrefs;
 class StorageUtil
 {
 	#if sys
+
+	public static final rootDir:String = LimeSystem.applicationStorageDirectory;
+		
 	public static function getStorageDirectory():String {
 		var path:String = '';
 		#if android
-			var storageFolder:String = ClientPrefs.data.storageFolder;
+			if (!FileSystem.exists(rootDir + 'storageFolder.txt'))
+			        File.saveContent(rootDir + 'storageFolder.txt', ClientPrefs.data.storageType);
+		        var storageFolder:String = File.getContent(rootDir + 'storageFolder.txt');
 			switch(storageFolder) {
 				case 'NovaFlare Engine':
 					path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/.NF Engine');
@@ -42,6 +47,8 @@ class StorageUtil
 					path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/.PsychEngine');
 				case 'Krikoso Engine': 
 					path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/.KrikosoEngine');
+				case 'Psych Online': 
+					path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/.PsychOnline');
 				case 'Data': 
 					path = haxe.io.Path.addTrailingSlash(AndroidContext.getExternalFilesDir());
 				case 'Obb':
@@ -56,6 +63,7 @@ class StorageUtil
 		#end
 		return path;
 	}
+	
 	public static function saveContent(fileName:String, fileData:String, ?alert:Bool = true):Void
 	{
 		try
