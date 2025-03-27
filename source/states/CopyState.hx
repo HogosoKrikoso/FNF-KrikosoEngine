@@ -91,17 +91,17 @@ class CopyState extends MusicBeatState
 		//curFileText.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER);
 		//add(curFileText);
 
-		thread = new ThreadPool(0, CoolUtil.getCPUThreadsCount(), MULTI_THREADED);
+		/*thread = new ThreadPool(0, CoolUtil.getCPUThreadsCount(), MULTI_THREADED);
 		new FlxTimer().start(0.5, (tmr) -> {
-			thread.run(function(poop, shit) {
+			thread.run(function(poop, shit) {*/
 				for (file in locatedFiles)
 				{
 					loopTimes++;
 					copyAsset(file);
 			                //curFileText.text = "Copying asset:" + file;
 				}
-			}, null);
-		});
+			/*}, null);
+		});*/
 
 		super.create();
 	}
