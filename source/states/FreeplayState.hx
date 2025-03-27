@@ -34,6 +34,7 @@ class FreeplayState extends MusicBeatState
 	var lerpRating:Float = 0;
 	var intendedScore:Int = 0;
 	var intendedRating:Float = 0;
+	var transitionMode:Bool = false;
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
@@ -139,6 +140,7 @@ class FreeplayState extends MusicBeatState
 
 		diffText = new FlxText(scoreText.x, scoreText.y + 45, 0, "", 24);
 		diffText.setFormat(Paths.font("vcr.ttf"), 25, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		diffText.borderSize = 2
 		add(diffText);
 
 		add(scoreText);
@@ -243,6 +245,7 @@ class FreeplayState extends MusicBeatState
 
 		curSongText.text = (curSelected + 1) + '/' + songs.length;
 
+		if(!transitionMode){
 		if (!player.playingMusic)
 		{
 			scoreText.text = 'PERSONAL BEST: ' + lerpScore + ' (' + ratingSplit.join('.') + '%)';
@@ -419,6 +422,8 @@ class FreeplayState extends MusicBeatState
 				return;
 			}
 
+			transitionMode = true;
+
 			FlxG.sound.play(Paths.sound('confirmMenu'));
 
 			FlxFlicker.flicker(grpSongs.members[curSelected], 1, 0.06, false, false, function(flick:FlxFlicker) {
@@ -440,6 +445,7 @@ class FreeplayState extends MusicBeatState
 			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
 			removeTouchPad();
 			FlxG.sound.play(Paths.sound('scrollMenu'));
+		}
 		}
 
 		updateTexts(elapsed);
@@ -604,13 +610,17 @@ class FreeplayState extends MusicBeatState
 		for (i in min...max)
 		{
 			var item:Alphabet = grpSongs.members[i];
-			item.visible = item.active = true;
+			if(!transitionMode){
+			        item.visible = item.active = true;
+			}
 			item.screenCenter(X);
 			item.x -= (150/2);
 			item.y = ((item.targetY - lerpSelected) * 1.3 * item.distancePerItem.y) + item.startPosition.y;
 
 			var icon:HealthIcon = iconArray[i];
-			icon.visible = icon.active = true;
+			if(!transitionMode){
+		        	icon.visible = icon.active = true;
+			}
 			_lastVisibles.push(i);
 		}
 	}
