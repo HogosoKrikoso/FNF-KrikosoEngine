@@ -380,7 +380,6 @@ class FreeplayState extends MusicBeatState
 		}
 		else if (controls.ACCEPT && !player.playingMusic)
 		{
-			persistentUpdate = false;
 			var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
 			var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
 			/*#if MODS_ALLOWED
@@ -427,7 +426,9 @@ class FreeplayState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('confirmMenu'));
 
 			FlxFlicker.flicker(grpSongs.members[curSelected], 1, 0.06, false, false, function(flick:FlxFlicker) {
-	
+
+			persistentUpdate = false;
+				
 			LoadingState.loadAndSwitchState(new PlayState());
 
 			FlxG.sound.music.volume = 0;
