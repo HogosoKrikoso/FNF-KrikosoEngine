@@ -140,7 +140,7 @@ class FreeplayState extends MusicBeatState
 
 		diffText = new FlxText(scoreText.x, scoreText.y + 45, 0, "", 24);
 		diffText.setFormat(Paths.font("vcr.ttf"), 25, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		diffText.borderSize = 2
+		diffText.borderSize = 2;
 		add(diffText);
 
 		add(scoreText);
