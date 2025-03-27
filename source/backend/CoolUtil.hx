@@ -2,6 +2,7 @@ package backend;
 
 import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
+import mobile.backend.StorageUtil;
 
 #if cpp
 @:cppFileCode('#include <thread>')
@@ -156,7 +157,7 @@ class CoolUtil
 	inline public static function getSavePath():String {
 		//final company:String = FlxG.stage.application.meta.get('company');
 		// #if (flixel < "5.0.0") return company; #else
-		return Sys.getCwd();
+		return StorageUtil.getStorageDirectory();
 		// #end
 	}
 
