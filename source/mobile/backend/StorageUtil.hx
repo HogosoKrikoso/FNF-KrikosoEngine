@@ -38,7 +38,7 @@ class StorageUtil
 		var path:String = '';
 		#if android
 			if (!FileSystem.exists(rootDir + 'storageFolder.txt'))
-			        File.saveContent(rootDir + 'storageFolder.txt', ClientPrefs.data.storageType);
+			        File.saveContent(rootDir + 'storageFolder.txt', ClientPrefs.data.storageFolder);
 		        var storageFolder:String = File.getContent(rootDir + 'storageFolder.txt');
 			switch(storageFolder) {
 				case 'NovaFlare Engine':
