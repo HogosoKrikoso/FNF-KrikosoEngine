@@ -15,13 +15,6 @@ jobs:
             setupCommand: .\"setup/windows.bat"
             artifactName: windowsBuild-x86_64
             artifactPath: export\release\windows\bin\*
-          - name: Linux
-            os: ubuntu-22.04
-            method: linux
-            buildArgs: linux
-            setupCommand: sh ./setup/unix.sh
-            artifactName: linuxBuild-x86_64
-            artifactPath: export/release/linux/bin/
           - name: macOS AArch64
             os: macos-15
             method: none
@@ -43,13 +36,6 @@ jobs:
             setupCommand: sh ./setup/unix.sh
             artifactName: androidBuild-x64
             artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
-          - name: iOS
-            os: macos-15
-            method: ios
-            buildArgs: "ios -nosign"
-            setupCommand: sh ./setup/unix.sh
-            artifactName: iOSBuild
-            artifactPath: "export/release/ios/build/Release-iphoneos/*.ipa"
     uses: ./.github/workflows/build.yml
     with:
         name: ${{ matrix.name }}
