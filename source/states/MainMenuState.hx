@@ -15,12 +15,12 @@ class MainMenuState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
 	var optionShit:Array<String> = [
-		'story_mode',
-		'freeplay',
-		#if MODS_ALLOWED 'mods', #end
-		#if ACHIEVEMENTS_ALLOWED 'awards', #end
-		'credits',
-		'options'
+		['story_mode', 'Story Mode'],
+		['freeplay', 'Freeplay'],
+		#if MODS_ALLOWED ['mods', 'Mods'], #end
+		#if ACHIEVEMENTS_ALLOWED ['adwards', 'Adwards'], #end
+		['credits', 'Credits'],
+		['options', 'Options'],
 	];
 
 	var magenta:FlxSprite;
@@ -71,7 +71,7 @@ class MainMenuState extends MusicBeatState
 		for (i in 0...optionShit.length)
 		{
 			if(ClientPrefs.data.fontMenu) {
-			var menuItem:FlxText = new FlxText(50, 50 + (i * 140), 0, "", 32);
+			var menuItem:FlxText = new FlxText(50, 50 + (i * 140), 0, optionShit[i][2], 70);
 	        	menuItem.setFormat(Paths.font("Tardling.ttf"), 70, FlxColor.WHITE, LEFT);
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set(0, 1);
@@ -79,7 +79,7 @@ class MainMenuState extends MusicBeatState
 			} else {
 			var menuItem:FlxSprite = new FlxSprite(100, (i * 140));
 			menuItem.antialiasing = ClientPrefs.data.antialiasing;
-			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
+			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i][1]);
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
@@ -159,7 +159,7 @@ class MainMenuState extends MusicBeatState
 
 					FlxFlicker.flicker(menuItems.members[curSelected], 1, 0.1, false, false, function(flick:FlxFlicker)
 					{
-						switch (optionShit[curSelected])
+						switch (optionShit[curSelected][1])
 						{
 							case 'story_mode':
 								MusicBeatState.switchState(new StoryMenuState());
