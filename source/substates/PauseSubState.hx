@@ -18,6 +18,7 @@ class PauseSubState extends MusicBeatSubstate
 
 	var menuItems:Array<String> = [];
 	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Chart Editor', 'Change Difficulty', 'Options', 'Exit to menu'];
+	var menuThumbnails:Array<String> = ['example1', 'example2'];
 	var difficultyChoices = [];
 	var curSelected:Int = 0;
 
@@ -113,6 +114,13 @@ class PauseSubState extends MusicBeatSubstate
 		chartingText.visible = PlayState.chartingMode;
 		add(chartingText);
 
+		var uhm:Int = FlxG.getRandomInt(0, menuThumbnails.length);
+		var image:String = menuThumbnails[uhm];
+		
+		var thumbnail:FlxSprite = new FlxSprite(0, 10).loadGraphic(Paths.image(image));
+		thumbnail.antialiasing = ClientPrefs.data.antialiasing;
+		add(thumbnaill);
+
 		blueballedTxt.alpha = 0;
 		levelDifficulty.alpha = 0;
 		levelInfo.alpha = 0;
@@ -120,12 +128,14 @@ class PauseSubState extends MusicBeatSubstate
 		levelInfo.x = FlxG.width - (levelInfo.width + 20);
 		levelDifficulty.x = FlxG.width - (levelDifficulty.width + 20);
 		blueballedTxt.x = FlxG.width - (blueballedTxt.width + 20);
-
+		thumbnaill.x = (0 - thumbnail.width);
+			
 		FlxTween.tween(bg, {alpha: 0.6}, 0.4, {ease: FlxEase.quartInOut});
 		FlxTween.tween(levelInfo, {alpha: 1, y: 20}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.3});
 		FlxTween.tween(levelDifficulty, {alpha: 1, y: levelDifficulty.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.5});
 		FlxTween.tween(blueballedTxt, {alpha: 1, y: blueballedTxt.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.7});
-
+		FlxTween.tween(thumbnail, {x: 10}, 0.4, {ease: FlxEase.quartInOut})
+			
 		grpMenuShit = new FlxTypedGroup<Alphabet>();
 		add(grpMenuShit);
 
