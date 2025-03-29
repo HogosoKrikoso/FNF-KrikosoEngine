@@ -70,6 +70,13 @@ class MainMenuState extends MusicBeatState
 
 		for (i in 0...optionShit.length)
 		{
+			if(ClientPrefs.data.fontMenu) {
+			var menuItem:FlxText = new FlxText(50, 50 + (i * 140), 0, "", 32);
+	        	menuItem.setFormat(Paths.font("Tardling.ttf"), 70, FlxColor.WHITE, LEFT);
+			menuItems.add(menuItem);
+			menuItem.scrollFactor.set(0, 1);
+			menuItem.updateHitbox();
+			} else {
 			var menuItem:FlxSprite = new FlxSprite(100, (i * 140));
 			menuItem.antialiasing = ClientPrefs.data.antialiasing;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
@@ -77,18 +84,18 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItems.add(menuItem);
-			menuItem.scrollFactor.set(1, 1);
-			menuItem.screenCenter(X);
+			menuItem.scrollFactor.set(0, 1);
 			menuItem.updateHitbox();
+			}
 		}
 
-		var psychVer:FlxText = new FlxText(12, FlxG.height - 44, 0, "Krikoso Engine v" + psychEngineVersion, 12);
+		var psychVer:FlxText = new FlxText(12, 12, 0, "Krikoso Engine v" + psychEngineVersion, 12);
 		psychVer.scrollFactor.set();
-		psychVer.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		psychVer.setFormat("VCR OSD Mono", 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(psychVer);
-		var fnfVer:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
+		var fnfVer:FlxText = new FlxText(12, 32, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
 		fnfVer.scrollFactor.set();
-		fnfVer.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		fnfVer.setFormat("VCR OSD Mono", 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(fnfVer);
 		changeItem();
 
@@ -210,7 +217,12 @@ class MainMenuState extends MusicBeatState
 	function changeItem(huh:Int = 0)
 	{
 		FlxG.sound.play(Paths.sound('scrollMenu'));
-		menuItems.members[curSelected].animation.play('idle');
+		if(!ClientPrefs.data.fontMenu) {
+	        	menuItems.members[curSelected].animation.play('idle');
+		} else {
+			menuItems.members.setFormat(Paths.font("Tardling.ttf"), 70, FlxColor.WHITE, LEFT);
+		}
+
 		menuItems.members[curSelected].updateHitbox();
 		menuItems.members[curSelected].screenCenter(X);
 
@@ -221,10 +233,15 @@ class MainMenuState extends MusicBeatState
 		if (curSelected < 0)
 			curSelected = menuItems.length - 1;
 
-		menuItems.members[curSelected].animation.play('selected');
-		menuItems.members[curSelected].centerOffsets();
+		if(!ClientPrefs.data.fontMenu) {
+	        	menuItems.members[curSelected].animation.play('selected');
+	        	menuItems.members[curSelected].centerOffsets();
+		} else {
+			menuItems.members.setFormat(Paths.font("Tardling.ttf"), 70, FlxColor.BLACK, LEFT);
+		}
+		
 		menuItems.members[curSelected].screenCenter(X);
-
-		camFollow.setPosition(menuItems.members[curSelected].getGraphicMidpoint().x, menuItems.members[curSelected].getGraphicMidpoint().y);
+		
+		camFollow.setPosition(0, (menuItems.members[curSelected].y + 70));
 	}
 }
