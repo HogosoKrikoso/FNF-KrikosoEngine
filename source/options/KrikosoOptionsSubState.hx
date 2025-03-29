@@ -10,6 +10,12 @@ class KrikosoOptionsSubState extends BaseOptionsMenu
 	{
 		title = 'Krikoso Engine';
 		rpcTitle = 'Krikoso Engine Menu'; //for Discord Rich Presence
+
+		var option:Option = new Option('Font Menu',
+			"If checked, the main menu will use the Tardling Font instead of animated sprites.",
+			'fontMenu',
+			'bool');
+		addOption(option);
 		
 		var option:Option = new Option('Score Text Separator:',
 			"What separator should use the Score Text?",
