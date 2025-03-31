@@ -105,7 +105,7 @@ class FreeplayState extends MusicBeatState
 
 		for (i in 0...songs.length)
 		{
-			var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
+			var songText:Alphabet = new Alphabet(-640, 320, songs[i].songName, true);
 			songText.targetY = i;
 			grpSongs.add(songText);
 
@@ -611,17 +611,16 @@ class FreeplayState extends MusicBeatState
 		for (i in min...max)
 		{
 			var item:Alphabet = grpSongs.members[i];
-			if(!transitionMode){
+			//if(!transitionMode){
 			        item.visible = item.active = true;
-			}
-			item.screenCenter(X);
-			item.x -= (150/2);
+			//}
+			item.x = FlxMath.lerp(item.x, 25, 0.1);
 			item.y = ((item.targetY - lerpSelected) * 1.3 * item.distancePerItem.y) + item.startPosition.y;
 
 			var icon:HealthIcon = iconArray[i];
-			if(!transitionMode){
+			//if(!transitionMode){
 		        	icon.visible = icon.active = true;
-			}
+			//} //webon esto esta ocultando las weas
 			_lastVisibles.push(i);
 		}
 	}
