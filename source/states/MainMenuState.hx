@@ -14,13 +14,13 @@ class MainMenuState extends MusicBeatState
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
-	var optionShit:Array<Dynamic> = [
-		['story_mode', 'Story Mode'],
-		['freeplay', 'Freeplay'],
-		#if MODS_ALLOWED ['mods', 'Mods'], #end
-		#if ACHIEVEMENTS_ALLOWED ['adwards', 'Adwards'], #end
-		['credits', 'Credits'],
-		['options', 'Options'],
+	var optionShit:Array<String> = [
+		'story_mode',
+		'freeplay',
+		#if MODS_ALLOWED 'mods', #end
+		#if ACHIEVEMENTS_ALLOWED 'adwards', #end
+		'credits',
+		'options',
 	];
 
 	var magenta:FlxSprite;
