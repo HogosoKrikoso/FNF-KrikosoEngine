@@ -9,10 +9,8 @@
     },
     {
       "name": "openfl",
-      "type": "git",
-      "dir": null,
-      "ref": "9.3.2",
-      "url": "https://github.com/MobilePorting/openfl"
+      "type": "haxelib",
+      "version": "9.3.2"
     },
     {
       "name": "flixel",
