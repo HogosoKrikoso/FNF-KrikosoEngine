@@ -146,7 +146,7 @@ class Song
 	{
 		var json:Dynamic = Json.parse(rawJson);
 		var song:Dynamic;
-		if (json.song.song != null) {
+		if (json.song.events != null) {
 		        song = json.song;
 		} else {
 			song = json;
