@@ -114,7 +114,7 @@ class PauseSubState extends MusicBeatSubstate
 		chartingText.visible = PlayState.chartingMode;
 		add(chartingText);
 
-		var uhm:Int = FlxG.getRandomInt(0, menuThumbnails.length);
+		var uhm:Int = FlxG.random.int(0, menuThumbnails.length);
 		var image:String = menuThumbnails[uhm];
 		
 		var thumbnail:FlxSprite = new FlxSprite(0, 10).loadGraphic(Paths.image(image));
