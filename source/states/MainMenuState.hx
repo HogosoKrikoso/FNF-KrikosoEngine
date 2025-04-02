@@ -220,7 +220,7 @@ class MainMenuState extends MusicBeatState
 		if(!ClientPrefs.data.fontMenu) {
 	        	menuItems.members[curSelected].animation.play('idle');
 		} else {
-			menuItems.members.color = FlxColor.WHITE;
+			menuItems.members.scale.x = 1;
 		}
 
 		menuItems.members[curSelected].updateHitbox();
@@ -237,7 +237,7 @@ class MainMenuState extends MusicBeatState
 	        	menuItems.members[curSelected].animation.play('selected');
 	        	menuItems.members[curSelected].centerOffsets();
 		} else {
-			menuItems.members.color = FlxColor.BLACK;
+			menuItems.members.scale.x = 2;
 		}
 		
 		menuItems.members[curSelected].screenCenter(X);
