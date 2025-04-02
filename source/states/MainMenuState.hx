@@ -70,13 +70,13 @@ class MainMenuState extends MusicBeatState
 
 		for (i in 0...optionShit.length)
 		{
-			if(ClientPrefs.data.fontMenu) {
+			/*if(ClientPrefs.data.fontMenu) {
 			var menuItem:FlxText = new FlxText(50, 50 + (i * 140), 0, optionShit[i][2], 70);
 	        	menuItem.setFormat(Paths.font("Tardling.ttf"), 70, FlxColor.WHITE, LEFT);
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set(0, 1);
 			menuItem.updateHitbox();
-			} else {
+			} else {*/
 			var menuItem:FlxSprite = new FlxSprite(100, (i * 140));
 			menuItem.antialiasing = ClientPrefs.data.antialiasing;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i][1]);
@@ -86,7 +86,7 @@ class MainMenuState extends MusicBeatState
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set(0, 1);
 			menuItem.updateHitbox();
-			}
+			//}
 		}
 
 		var psychVer:FlxText = new FlxText(12, 12, 0, "Krikoso Engine v" + psychEngineVersion, 12);
@@ -217,11 +217,11 @@ class MainMenuState extends MusicBeatState
 	function changeItem(huh:Int = 0)
 	{
 		FlxG.sound.play(Paths.sound('scrollMenu'));
-		if(!ClientPrefs.data.fontMenu) {
+		//if(!ClientPrefs.data.fontMenu) {
 	        	menuItems.members[curSelected].animation.play('idle');
-		} else {
+		/*} else {
 			menuItems.members.scale.x = 1;
-		}
+		}*/
 
 		menuItems.members[curSelected].updateHitbox();
 		menuItems.members[curSelected].screenCenter(X);
@@ -233,12 +233,12 @@ class MainMenuState extends MusicBeatState
 		if (curSelected < 0)
 			curSelected = menuItems.length - 1;
 
-		if(!ClientPrefs.data.fontMenu) {
+		//if(!ClientPrefs.data.fontMenu) {
 	        	menuItems.members[curSelected].animation.play('selected');
 	        	menuItems.members[curSelected].centerOffsets();
-		} else {
+		/*} else {
 			menuItems.members.scale.x = 2;
-		}
+		}*/
 		
 		menuItems.members[curSelected].screenCenter(X);
 		
