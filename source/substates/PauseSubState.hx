@@ -119,7 +119,7 @@ class PauseSubState extends MusicBeatSubstate
 		
 		var thumbnail:FlxSprite = new FlxSprite(0, 10).loadGraphic(Paths.image(image));
 		thumbnail.antialiasing = ClientPrefs.data.antialiasing;
-		add(thumbnaill);
+		add(thumbnail);
 
 		blueballedTxt.alpha = 0;
 		levelDifficulty.alpha = 0;
@@ -128,7 +128,7 @@ class PauseSubState extends MusicBeatSubstate
 		levelInfo.x = FlxG.width - (levelInfo.width + 20);
 		levelDifficulty.x = FlxG.width - (levelDifficulty.width + 20);
 		blueballedTxt.x = FlxG.width - (blueballedTxt.width + 20);
-		thumbnaill.x = (0 - thumbnail.width);
+		thumbnail.x = (0 - thumbnail.width);
 			
 		FlxTween.tween(bg, {alpha: 0.6}, 0.4, {ease: FlxEase.quartInOut});
 		FlxTween.tween(levelInfo, {alpha: 1, y: 20}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.3});
