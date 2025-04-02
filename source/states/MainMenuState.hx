@@ -84,6 +84,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.screenCenter(X);
+			menuItem.ID = i;
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set(0, 1);
 			menuItem.updateHitbox();
@@ -122,6 +123,16 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+
+		menuItems.forEach(function(spr:FlxSprite) {
+	        	if (FlxG.mouse.overlaps(spr)) {
+	                	if (FlxG.mouse.pressed) {
+					curSelected = spr.ID;
+					changeItem();
+				}
+	        	}
+		}
+				  
 		if (FlxG.sound.music.volume < 0.8)
 		{
 			FlxG.sound.music.volume += 0.5 * elapsed;
@@ -195,7 +206,7 @@ class MainMenuState extends MusicBeatState
 					{
 						if (i == curSelected)
 							continue;
-						FlxTween.tween(menuItems.members[i], {alpha: 0}, 0.4, {
+						FlxTween.tween(menuItems.members[i], {x: -1280}, 0.5, {
 							ease: FlxEase.quadOut,
 							onComplete: function(twn:FlxTween)
 							{
