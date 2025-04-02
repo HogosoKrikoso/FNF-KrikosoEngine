@@ -737,7 +737,7 @@ class PlayState extends MusicBeatState
 	        	healthBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
 		        	FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
 		} else {
-			healthBar.setColors(0xFF0000, 0x00FF00);
+			healthBar.setColors(FlxColor.RED, FlxColor.GREEN);
 		}
 	}
 
