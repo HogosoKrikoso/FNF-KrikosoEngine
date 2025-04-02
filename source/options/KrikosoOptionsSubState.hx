@@ -16,6 +16,12 @@ class KrikosoOptionsSubState extends BaseOptionsMenu
 			'fontMenu',
 			'bool');
 		addOption(option);
+
+		var option:Option = new Option('Vanilla Health Bar',
+			"If checked, The Health Bar colors will be Red and Green.",
+			'rgBar',
+			'bool');
+		addOption(option);
 		
 		var option:Option = new Option('Score Text Separator:',
 			"What separator should use the Score Text?",
