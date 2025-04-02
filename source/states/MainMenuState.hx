@@ -79,7 +79,7 @@ class MainMenuState extends MusicBeatState
 			} else {*/
 			var menuItem:FlxSprite = new FlxSprite(100, (i * 140));
 			menuItem.antialiasing = ClientPrefs.data.antialiasing;
-			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i][1]);
+			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
@@ -159,7 +159,7 @@ class MainMenuState extends MusicBeatState
 
 					FlxFlicker.flicker(menuItems.members[curSelected], 1, 0.1, false, false, function(flick:FlxFlicker)
 					{
-						switch (optionShit[curSelected][1])
+						switch (optionShit[curSelected])
 						{
 							case 'story_mode':
 								MusicBeatState.switchState(new StoryMenuState());
