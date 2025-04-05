@@ -155,9 +155,9 @@ class CoolUtil
 	**/
 	//@:access(flixel.util.FlxSave.validate)
 	inline public static function getSavePath():String {
-		//final company:String = FlxG.stage.application.meta.get('company');
+		final company:String = FlxG.stage.application.meta.get('company');
 		// #if (flixel < "5.0.0") return company; #else
-		return StorageUtil.getStorageDirectory();
+		return '${company}/${flixel.util.FlxSave.validate(FlxG.stage.application.meta.get('file'))}';
 		// #end
 	}
 
