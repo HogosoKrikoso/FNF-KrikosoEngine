@@ -304,13 +304,16 @@ class PlayState extends MusicBeatState
 		camGame = initPsychCamera();
 		camHUD = new FlxCamera();
 		camOther = new FlxCamera();
+		debugCam = new FlxCamera();
 		luaTpadCam = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
 		camOther.bgColor.alpha = 0;
+		debugCam.bgColor.alpha = 0;
 		luaTpadCam.bgColor.alpha = 0;
 
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camOther, false);
+		FlxG.cameras.add(debugCam, false);
 		FlxG.cameras.add(luaTpadCam, false);
 		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
 
@@ -408,7 +411,7 @@ class PlayState extends MusicBeatState
 
 		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
 		luaDebugGroup = new FlxTypedGroup<psychlua.DebugLuaText>();
-		luaDebugGroup.cameras = [camOther];
+		luaDebugGroup.cameras = [debugCam];
 		add(luaDebugGroup);
 		#end
 
@@ -661,10 +664,10 @@ class PlayState extends MusicBeatState
 		cacheCountdown();
 		cachePopUpScore();
 
-		#if mobile
+		/*#if mobile
 		        addTouchPad("NONE", "P");
  		        addTouchPadCamera();
-		#end
+		#end*/
 
 		super.create();
 		Paths.clearUnusedMemory();
@@ -737,7 +740,7 @@ class PlayState extends MusicBeatState
 	        	healthBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
 		        	FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
 		} else {
-			healthBar.setColors(FlxColor.RED, FlxColor.GREEN);
+			healthBar.setColors(FlxColor.RED, FlxColor.LIME);
 		}
 	}
 
@@ -1170,8 +1173,8 @@ class PlayState extends MusicBeatState
                 if(ClientPrefs.data.separator == "Circle") {
                         separator = "•";
                 }
-                if(ClientPrefs.data.separator == "Virgulilla") {
-                        separator = "~";
+                if(ClientPrefs.data.separator == "Arrow") {
+                        separator = "^";
                 }
 		if(totalPlayed != 0)
 		{
