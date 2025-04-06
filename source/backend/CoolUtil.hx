@@ -143,22 +143,8 @@ class CoolUtil
 			FlxG.error("Platform is not supported for CoolUtil.openFolder");
 		#end
 	}
-
-	/**
-		Helper Function to Fix Save Files for Flixel 5
-
-		-- EDIT: [November 29, 2023] --
-
-		this function is used to get the save path, period.
-		since newer flixel versions are being enforced anyways.
-		@crowplexus
-	**/
-	@:access(flixel.util.FlxSave.validate)
 	inline public static function getSavePath():String {
-		final company:String = FlxG.stage.application.meta.get('company');
-		// #if (flixel < "5.0.0") return company; #else
-		return '${company}/${flixel.util.FlxSave.validate(FlxG.stage.application.meta.get('file'))}';
-		// #end
+		return 'KrikosoData';
 	}
 
 	public static function setTextBorderFromString(text:FlxText, border:String)
