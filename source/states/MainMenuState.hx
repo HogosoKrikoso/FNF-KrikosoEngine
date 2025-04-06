@@ -131,7 +131,7 @@ class MainMenuState extends MusicBeatState
 					changeItem();
 				}
 	        	}
-		}
+		});
 				  
 		if (FlxG.sound.music.volume < 0.8)
 		{
