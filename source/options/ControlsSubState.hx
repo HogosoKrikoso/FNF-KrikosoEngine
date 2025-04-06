@@ -113,7 +113,7 @@ class ControlsSubState extends MusicBeatSubstate
 		text.setScale(0.4);
 		add(text);
 
-		addTouchPad("NONE", "B");
+		addTouchPad("FULL", "A_B");
 
 		createTexts();
 	}
