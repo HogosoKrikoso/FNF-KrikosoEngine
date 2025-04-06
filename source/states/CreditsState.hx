@@ -45,7 +45,7 @@ class CreditsState extends MusicBeatState
 			['Moxie',				'moxie',			'Helper #2 of Psych Engine Mobile',							'https://twitter.com/moxie_specalist',	'F592C4'],
 			['Krikoso Engine Team'],
 			['Hogoso Krikoso',			'HogosoKrikoso',				'Head Director of Krikoso Engine',						'https://www.youtube.com/@HogMedioScorched-',	'0000AA'],
-			['Peppeno',			'bolly',			'',		'https://youtube.com/@esalguien_123',		'AAAA00'],
+			['Peppeno',			'bolly',			'',		'https://youtube.com/@es_alguien123',		'AAAA00'],
 			['Blop',				'blop',			'',	"00FF44"],
 			[''],
 			['Psych Engine Team'],
