@@ -68,7 +68,7 @@ class OptionsState extends MusicBeatState
 		{
 			var optionText:Alphabet = new Alphabet(200, 200, options[i], true);
 			optionText.screenCenter(Y);
-			optionText.y += (75 * i);
+			optionText.y += (75 * (i - curSelected));
 			grpOptions.add(optionText);
 		}
 
@@ -102,7 +102,7 @@ class OptionsState extends MusicBeatState
 		ClientPrefs.loadPrefs();
 		controls.isInSubstate = false;
         removeTouchPad();
-		addTouchPad("UP_DOWN", "A_B_C");
+		addTouchPad("UP_DOWN", "A_B");
 		persistentUpdate = true;
 	}
 
