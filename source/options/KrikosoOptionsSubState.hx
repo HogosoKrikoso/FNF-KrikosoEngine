@@ -27,7 +27,7 @@ class KrikosoOptionsSubState extends BaseOptionsMenu
 			"What separator should use the Score Text?",
 			'separator',
 			'string',
-			['Double Slash', 'Minus Symbol', 'Pipe', 'Circle', 'Arrow');
+			['Double Slash', 'Minus Symbol', 'Pipe', 'Circle', 'Arrow']);
 		addOption(option);
 
 		var option:Option = new Option('Combo on Stage',
