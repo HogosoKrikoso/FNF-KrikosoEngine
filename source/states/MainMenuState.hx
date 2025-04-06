@@ -123,15 +123,6 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-
-		menuItems.forEach(function(spr:FlxSprite) {
-	        	if (FlxG.mouse.overlaps(spr)) {
-	                	if (FlxG.mouse.justPressed) {
-					curSelected = spr.ID;
-					changeItem();
-				}
-	        	}
-		});
 				  
 		if (FlxG.sound.music.volume < 0.8)
 		{
@@ -142,6 +133,16 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
+
+			menuItems.forEach(function(spr:FlxSprite) {
+	                	if (FlxG.mouse.overlaps(spr)) {
+	                        	if (FlxG.mouse.justPressed) {
+				        	curSelected = spr.ID;
+				        	changeItem();
+			        	}
+	        	        }
+		        });
+			
 			if (controls.UI_UP_P)
 				changeItem(-1);
 
