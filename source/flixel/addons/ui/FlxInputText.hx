@@ -1,4 +1,4 @@
-solopackage flixel.addons.ui;
+package flixel.addons.ui;
 
 import lime.system.Clipboard;
 import flash.errors.Error;
