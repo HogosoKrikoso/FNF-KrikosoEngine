@@ -1,6 +1,6 @@
 # Friday Night Funkin: Krikoso Engine
 
--# ![logo](https://github.com/user-attachments/assets/8175a866-04ca-4e3b-be9e-75f975c0329e)
+![logo](https://github.com/user-attachments/assets/8175a866-04ca-4e3b-be9e-75f975c0329e)
 
 Forked from a mobile port of Psych Engine made by mcgabe19.
 
