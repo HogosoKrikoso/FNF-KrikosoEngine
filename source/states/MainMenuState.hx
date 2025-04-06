@@ -126,7 +126,7 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite) {
 	        	if (FlxG.mouse.overlaps(spr)) {
-	                	if (FlxG.mouse.pressed) {
+	                	if (FlxG.mouse.justPressed) {
 					curSelected = spr.ID;
 					changeItem();
 				}
@@ -206,8 +206,8 @@ class MainMenuState extends MusicBeatState
 					{
 						if (i == curSelected)
 							continue;
-						FlxTween.tween(menuItems.members[i], {x: -1280}, 0.5, {
-							ease: FlxEase.quadOut,
+						FlxTween.tween(menuItems.members[i], {x: -720}, 0.5, {
+							ease: FlxEase.quadIn,
 							onComplete: function(twn:FlxTween)
 							{
 								menuItems.members[i].kill();
@@ -229,29 +229,21 @@ class MainMenuState extends MusicBeatState
 	function changeItem(huh:Int = 0)
 	{
 		FlxG.sound.play(Paths.sound('scrollMenu'));
-		//if(!ClientPrefs.data.fontMenu) {
-	        	menuItems.members[curSelected].animation.play('idle');
-		/*} else {
-			menuItems.members.scale.x = 1;
-		}*/
-
-		menuItems.members[curSelected].updateHitbox();
-		menuItems.members[curSelected].screenCenter(X);
-
+		menuItems.forEach(function(spr:FlxSprite) {
+	        	spr.animation.play('idle');
+		        spr.updateHitbox();
+		        spr.screenCenter(X);
+		});
+		
 		curSelected += huh;
 
 		if (curSelected >= menuItems.length)
 			curSelected = 0;
 		if (curSelected < 0)
 			curSelected = menuItems.length - 1;
-
-		//if(!ClientPrefs.data.fontMenu) {
-	        	menuItems.members[curSelected].animation.play('selected');
-	        	menuItems.members[curSelected].centerOffsets();
-		/*} else {
-			menuItems.members.scale.x = 2;
-		}*/
 		
+	        menuItems.members[curSelected].animation.play('selected');
+	        menuItems.members[curSelected].centerOffsets();
 		menuItems.members[curSelected].screenCenter(X);
 		
 		camFollow.setPosition(0, (menuItems.members[curSelected].y + 70));
