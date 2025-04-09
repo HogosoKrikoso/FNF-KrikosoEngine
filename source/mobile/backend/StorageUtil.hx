@@ -40,7 +40,7 @@ class StorageUtil
 			if (!FileSystem.exists(rootDir + 'storageFolder.txt'))
 			        File.saveContent(rootDir + 'storageFolder.txt', ClientPrefs.data.storageFolder);
 		        var storageFolder:String = File.getContent(rootDir + 'storageFolder.txt');
-	        	path = getUnforcedPath(storageFolder)
+	        	path = getUnforcedPath(storageFolder);
 		#elseif ios
 			path = lime.system.System.documentsDirectory;
 		#else
