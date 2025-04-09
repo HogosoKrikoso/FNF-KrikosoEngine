@@ -26,7 +26,7 @@ import mobile.backend.MobileScaleMode;
 import flixel.input.keyboard.FlxKey;
 import options.BaseOptionsMenu;
 import options.Option;
-import mobile.backend.StorageUtil
+import mobile.backend.StorageUtil;
 
 class MobileOptionsSubState extends BaseOptionsMenu
 {
@@ -109,7 +109,7 @@ class MobileOptionsSubState extends BaseOptionsMenu
 		if (ClientPrefs.data.storageFolder != lastStorageFolder)
 		{
 			File.saveContent(lime.system.System.applicationStorageDirectory + 'storageFolder.txt', ClientPrefs.data.storageFolder);
-			var lastStoragePath:String = getForcedPath(lastStorageFolder) + '/';
+			var lastStoragePath:String = StorageUtil.getForcedPath(lastStorageFolder) + '/';
 	        	try
 	         	{
 		        	Sys.command('rm', ['-rf', lastStoragePath]);
