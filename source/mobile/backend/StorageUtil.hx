@@ -40,27 +40,56 @@ class StorageUtil
 			if (!FileSystem.exists(rootDir + 'storageFolder.txt'))
 			        File.saveContent(rootDir + 'storageFolder.txt', ClientPrefs.data.storageFolder);
 		        var storageFolder:String = File.getContent(rootDir + 'storageFolder.txt');
-			switch(storageFolder) {
-				case 'NovaFlare Engine':
-					path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/.NF Engine');
-				case 'Psych Engine':
-					path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/.PsychEngine');
-				case 'Krikoso Engine': 
-					path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/.KrikosoEngine');
-				case 'Psych Online': 
-					path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/.PsychOnline');
-				case 'Data': 
-					path = haxe.io.Path.addTrailingSlash(AndroidContext.getExternalFilesDir());
-				case 'Obb':
-				        path = haxe.io.Path.addTrailingSlash(AndroidContext.getObbDir());
-				case 'Media':
-				        path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/Android/media/' + lime.app.Application.current.meta.get('packageName'));
-			}
+	        	path = getUnforcedPath(storageFolder)
 		#elseif ios
 			path = lime.system.System.documentsDirectory;
 		#else
 			path = Sys.getCwd();
 		#end
+		return path;
+	}
+	
+	public static function getForcedPath(folderType:String):String {
+		var path:String = '';
+		var externalStorageDir:String = '/storage/emulated/0';
+		var localPackage:String = 'com.hogoso.krikosoengine';
+		switch(folderType) {
+			case 'NovaFlare Engine':
+					path = externalStorageDir + '/.NF Engine';
+			case 'Psych Engine':
+					path = externalStorageDir + '/.PsychEngine';
+			case 'Krikoso Engine': 
+				path = externalStorageDir + '/.KrikosoEngine';
+			case 'Psych Online': 
+				path = externalStorageDir + '/.PsychOnline';
+			case 'Data': 
+				path = externalStorageDir + '/Android/data/' + localPackage + '/files';
+			case 'Obb':
+			        path = externalStorageDir + '/Android/obb/' + localPackage;
+			case 'Media':
+			        path = externalStorageDir + '/Android/media/' + localPackage;
+		}
+		return path;
+	}
+					
+        public static function getUnforcedPath(folderType:String):String {
+		var path:String = '';
+		switch(folderType) {
+			case 'NovaFlare Engine':
+				path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/.NF Engine');
+			case 'Psych Engine':
+				path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/.PsychEngine');
+			case 'Krikoso Engine': 
+				path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/.KrikosoEngine');
+			case 'Psych Online': 
+				path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/.PsychOnline');
+			case 'Data': 
+				path = haxe.io.Path.addTrailingSlash(AndroidContext.getExternalFilesDir());
+			case 'Obb':
+			        path = haxe.io.Path.addTrailingSlash(AndroidContext.getObbDir());
+			case 'Media':
+			        path = haxe.io.Path.addTrailingSlash(AndroidEnvironment.getExternalStorageDirectory() + '/Android/media/' + lime.app.Application.current.meta.get('packageName'));
+		}
 		return path;
 	}
 	
