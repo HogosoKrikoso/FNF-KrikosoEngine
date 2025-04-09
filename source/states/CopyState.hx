@@ -74,7 +74,7 @@ class CopyState extends MusicBeatState
 		add(new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, 0xffcaff4d));
 
 		loadingImage = new FlxSprite(0, 0, Paths.image('funkay'));
-		loadingImage.setGraphicSize(0, FlxG.height);
+		loadingImage.setGraphicSize(FlxG.width, FlxG.height);
 		loadingImage.updateHitbox();
 		loadingImage.screenCenter();
 		add(loadingImage);
@@ -87,20 +87,23 @@ class CopyState extends MusicBeatState
 		loadedText.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, LEFT);
 		add(loadedText);
 		
-		//curFileText = new FlxText(loadingBar.x, loadingBar.y + 3, FlxG.width, '', 16);
-		//curFileText.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER);
-		//add(curFileText);
+		curFileText = new FlxText(loadingBar.x, loadingBar.y + 3, FlxG.width, '', 16);
+		curFileText.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER);
+		add(curFileText);
 
-		thread = new ThreadPool(0, CoolUtil.getCPUThreadsCount(), MULTI_THREADED);
-		new FlxTimer().start(0.5, (tmr) -> {
-			thread.run(function(poop, shit) {
-				for (file in locatedFiles)
-				{
-					loopTimes++;
-					copyAsset(file);
-			                //curFileText.text = "Copying asset:" + file;
-				}
-			}, null);
+		thread = new ThreadPool(0, CoolUtil.getCPUThreadsCount());
+		thread.doWork.add(function(poop)
+		{
+			for (file in locatedFiles)
+			{
+				loopTimes++;
+				copyAsset(file);
+			}
+		});
+		
+		new FlxTimer().start(0.5, (tmr) ->
+		{
+			thread.queue({});
 		});
 
 		super.create();
