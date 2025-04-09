@@ -132,14 +132,14 @@ class FreeplayState extends MusicBeatState
 		WeekData.setDirectoryFromWeek();
 
 		scoreText = new FlxText(0, 5, 0, "", 32);
-		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER);
 
 		scoreBG = FlxSpriteUtil.drawRoundRect(new FlxSprite(0, 0).makeGraphic(FlxG.width, 42, FlxColor.TRANSPARENT), 0, 0, FlxG.width, 42, 15, 15, FlxColor.BLACK);
 		scoreBG.alpha = 0.6;
 		add(scoreBG);
 
 		diffText = new FlxText(scoreText.x, scoreText.y + 45, 0, "", 24);
-		diffText.setFormat(Paths.font("vcr.ttf"), 25, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		diffText.setFormat(Paths.font("Tardling.ttf"), 25, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		diffText.borderSize = 2;
 		add(diffText);
 
@@ -156,7 +156,7 @@ class FreeplayState extends MusicBeatState
 		add(missingTextBG);
 		
 		missingText = new FlxText(50, 0, FlxG.width - 100, '', 24);
-		missingText.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		missingText.setFormat(Paths.font("Tardling.ttf"), 24, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		missingText.scrollFactor.set();
 		missingText.visible = false;
 		add(missingText);
