@@ -10,6 +10,8 @@ import objects.AttachedText;
 import options.Option;
 import backend.InputFormatter;
 
+import flixel.util.FlxSpriteUtil;
+
 class BaseOptionsMenu extends MusicBeatSubstate
 {
 	private var curOption:Option = null;
@@ -60,7 +62,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		descBox.alpha = 0.6;
 		add(descBox);
 
-		var titleBox:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, 60, FlxColor.BLACK);
+		var titleBox:FlxSprite = FlxSpriteUtil.drawRoundRect(new FlxSprite().makeGraphic(FlxG.width, 60, FlxColor.TRANSPARENT), 0, 0, FlxG.width, 60, 0, 15, FlxColor.BLACK);
 		titleBox.alpha = 0.6;
 		add(titleBox);
 
