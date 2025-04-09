@@ -26,6 +26,7 @@ import mobile.backend.MobileScaleMode;
 import flixel.input.keyboard.FlxKey;
 import options.BaseOptionsMenu;
 import options.Option;
+import mobile.backend.StorageUtil
 
 class MobileOptionsSubState extends BaseOptionsMenu
 {
