@@ -23,6 +23,7 @@
 package mobile.backend;
 
 import lime.system.System as LimeSystem;
+import haxe.io.Path;
 
 /**
  * A storage class for mobile.
