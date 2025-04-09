@@ -49,7 +49,8 @@ class StorageUtil
 		#end
 		return path;
 	}
-	
+
+	#if android
 	public static function getForcedPath(folderType:String):String {
 		var path:String = '';
 		var externalStorageDir:String = '/storage/emulated/0';
@@ -93,6 +94,7 @@ class StorageUtil
 		}
 		return path;
 	}
+	#end
 	
 	public static function saveContent(fileName:String, fileData:String, ?alert:Bool = true):Void
 	{
