@@ -91,7 +91,7 @@ class MobileOptionsSubState extends BaseOptionsMenu
 
 		#if android
 		var option:Option = new Option('Storage Folder:',
-			"What Folder should the engine use?\n(This will restart the game but the folder won't be deleted)",
+			"What Folder should the engine use?\n(This will restart the game but the old folder will be deleted)",
 			'storageFolder',
 			'string',
 			['Krikoso Engine', 'Psych Engine', 'Psych Online', 'NovaFlare Engine', 'Data', 'Media', 'Obb']);
@@ -108,6 +108,14 @@ class MobileOptionsSubState extends BaseOptionsMenu
 		if (ClientPrefs.data.storageFolder != lastStorageFolder)
 		{
 			File.saveContent(lime.system.System.applicationStorageDirectory + 'storageFolder.txt', ClientPrefs.data.storageFolder);
+			var lastStoragePath:String = getForcedPath(lastStorageFolder) + '/';
+	        	try
+	         	{
+		        	Sys.command('rm', ['-rf', lastStoragePath]);
+	        	}
+	        	catch (e:haxe.Exception) {
+	        		trace('Failed to remove last directory. (${e.message})');
+			}
 			CoolUtil.showPopUp('Storage Type has been changed and you needed restart the game!!\nPress OK to close the game.', 'Notice!');
 			lime.system.System.exit(0);
 		}
