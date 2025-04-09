@@ -98,7 +98,7 @@ class CopyState extends MusicBeatState
 			{
 				loopTimes++;
 				copyAsset(file);
-				curFileText.text = file;
+				//curFileText.text = file;
 			}
 		});
 		
