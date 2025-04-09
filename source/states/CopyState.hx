@@ -47,7 +47,7 @@ class CopyState extends MusicBeatState
 	public var loadingImage:FlxSprite;
 	public var loadingBar:FlxBar;
 	public var loadedText:FlxText;
-	//public var curFileText:FlxText;
+	public var curFileText:FlxText;
 	public var thread:ThreadPool;
 
 	var failedFilesStack:Array<String> = [];
@@ -98,6 +98,7 @@ class CopyState extends MusicBeatState
 			{
 				loopTimes++;
 				copyAsset(file);
+				curFileText.text = file;
 			}
 		});
 		
