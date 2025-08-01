@@ -16,6 +16,4 @@
 ```
 
 
-[<kbd> <br> Old Repository <br> </kbd>](https://github.com/HogMedioScorched/FNF-PsychEngine-Mobile-HogsTake/) [<kbd> <br> Builds <br> </kbd>](https://github.com/HogMedioScorched/FNF-KrikosoEngine/actions/workflows/main.yml)
-
-[![Get it on SERVICE](https://gist.githubusercontent.com/cxmeel/0dbc95191f239b631c3874f4ccf114e2/raw/discord.svg)]()
+[<kbd> <br> Old Repository <br> </kbd>](https://github.com/HogMedioScorched/FNF-PsychEngine-Mobile-HogsTake/) [<kbd> <br> Builds <br> </kbd>](https://github.com/HogMedioScorched/FNF-KrikosoEngine/actions/workflows/main.yml) [![Get it on SERVICE](https://gist.githubusercontent.com/cxmeel/0dbc95191f239b631c3874f4ccf114e2/raw/discord.svg)]()
