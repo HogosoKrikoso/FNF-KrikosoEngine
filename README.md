@@ -1,6 +1,6 @@
 # Friday Night Funkin: Krikoso Engine
 
-``Forked from Psych Engine Mobile Port.``
+``Forked from Psych Engine Mobile Port. (they deleted it lol)``
 <details>
 <summary> <b>Screenshots</b> </summary>
   
